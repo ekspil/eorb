@@ -1,0 +1,22 @@
+{
+  "name": "EO_RB",
+  "version": "1.1.1",
+  "description": "My first chat on Node.JS",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "EfremovAV",
+  "license": "ISC",
+  "dependencies": {
+    "animate.css": "^3.5.2",
+    "async": "^2.6.1",
+    "express": "^4.15.3",
+    "jquery": "^3.2.1",
+    "log4js": "^1.1.1",
+    "mssql": "^4.3.0",
+    "node-autodetect-utf8-cp1251-cp866": "^0.1.0",
+    "socket.io": "^2.0.3",
+    "uikit": "^2.27.4"
+  }
+}

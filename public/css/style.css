@@ -1,0 +1,330 @@
+
+
+#main {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 15px;
+}
+
+
+
+
+#chat-box{
+    position: relative;
+    height: 100%;
+}
+
+#client-box{
+    height: 100%;
+}
+
+#user-name{
+    position: absolute;
+    top: -10px;
+    left: 10px;
+    }
+
+#unit{
+        position: absolute;
+        top: -10px;
+        left: 10px;
+    }
+
+#count {
+
+  width: 5%;
+  height: 50%;
+  position:absolute;
+  top: 25%;
+  right: 10px;
+  background: #fffceb;
+  color: #e28327;
+  border-color: rgba(226,131,39,.3);
+}
+#bagetext {
+  height: 100%;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+#this-user-name {
+    position: absolute;
+    top: -10px;
+    right: 10px;
+}
+
+#message-form{
+    position: absolute;
+    bottom: 10px;
+}
+
+#messages {
+    padding: 10px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 95%;
+}
+
+#clients-list{
+    padding: 10px;
+    overflow: auto;
+    height: 95%;
+    position: relative;
+    left: 5px;
+}
+
+#notready-list{
+    padding: 10px;
+    overflow-x:hidden;
+    overflow-y: auto;
+    max-height: 80%;
+    width: 95%;
+    position:relative;
+    left: 5%;
+    transition: height .4s;
+}
+
+#sborka{
+    padding: 5px;
+    overflow-x:hidden;
+    overflow-y: auto;
+    position:relative;
+    width: 101%;
+    left: 2%;
+    height: 100%;
+}
+
+#ready-list{
+    padding: 10px;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    max-height: 80%;
+    width: 105%;
+    position:relative;
+    left: 20%;
+    transition: .1s;
+}
+
+#panelTeaser{
+
+  width: 140%;
+  position:relative;
+  left: 0%;
+}
+
+#unit {
+
+  font-size: 20 px;
+}
+
+b {
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 60px; /* Размер шрифта в пунктах */
+
+
+}
+
+#position {
+  overflow-x: hidden;
+}
+
+a {
+  position:relative;
+  left: 5px;
+  transition: .4s;
+
+}
+span {
+  white-space: nowrap;
+  position:relative;
+  left: 0px;
+  margin-left: : 0px;
+  padding-left: : 0px;
+
+
+}
+a.uk-padding-vertical-remove {
+  height: 0px;
+}
+
+.list-of-products {
+  position: absolute;
+  padding-top: 5px;
+  margin-left: 0px;
+  left: 2px;
+  top: 20px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: 90%;
+  width: 100%;
+
+}
+
+.bg-overflow {
+background-image: url(../data/double-down.png);
+background-repeat: no-repeat;
+background-position: center;
+
+}
+.uk-panel-box-primary {
+
+  min-height: 0px;
+}
+
+.uk-panel-box-success {
+    background: #f2fae3;
+    color: #659f13;
+    border-color: rgba(101,159,19,.3);
+}
+
+.uk-panel-box-warning{
+    background: #fffceb;
+    color: #e28327;
+    border-color: rgba(226,131,39,.3);
+}
+
+
+
+.uk-panel-box-hidden-right {
+
+    height: 90px;
+    background: none;
+    color: #659f13;
+    border-color: none;
+    padding: 10px;
+}
+
+.uk-panel-box-hidden-left{
+    height: 90px;
+    background: none;
+    color: #e28327;
+    border-color: none;
+    padding: 10px;
+}
+
+.uk-panel-box-sborka {
+
+    background: #fffceb;
+    color: #543E00;
+    border-color: rgba(226,131,39,.3);
+    height: 32%;
+
+
+
+}
+.uk-panel-box-sborkasmall {
+
+    background: #fffceb;
+    color: #543E00;
+    border-color: rgba(226,131,39,.3);
+    height: 50%;
+
+
+
+}
+
+
+.uk-panel-teaser-sbor {
+  background: #FFBC00;
+  color: black;
+  border-color: rgba(226,131,39,.3);
+  height: 20px;
+  margin-left: : 0px;
+  padding-left: : 0px;
+}
+
+.uk-panel-box-sborka-ready {
+
+  background: #99ff33;
+  color: #659f13;
+  border-color: rgba(101,159,19,.3);
+    height: 32%;
+
+
+}
+
+.uk-panel-box-sborkasmall-ready {
+
+  background: #99ff33;
+  color: #659f13;
+  border-color: rgba(101,159,19,.3);
+    height: 50%;
+
+
+}
+
+.uk-panel-box-sborkasmall-readydost {
+
+  background: #000000;
+  color: #659f13;
+  border-color: rgba(101,159,19,.3);
+    height: 50%;
+
+
+}
+
+.uk-panel-box-sborka-payed {
+
+  background: #99ffff;
+  color: #003647;
+  border-color: rgba(101,159,19,.3);
+    height: 32%;
+
+
+}
+
+.uk-panel-box-sborkasmall-payed {
+
+  background: #99ffff;
+  color: #003647;
+  border-color: rgba(101,159,19,.3);
+    height: 50%;
+
+
+}
+
+.uk-panel-box-sborkasmall-dost {
+
+  background: #ff9494;
+  color: #003647;
+  border-color: rgba(101,159,19,.3);
+    height: 50%;
+
+
+}
+
+p {
+font-weight:bold;
+white-space: nowrap;
+}
+
+p.error{
+	text-decoration: line-through;
+  color: #999999;
+}
+
+p.line{
+	line-height: 0.5;
+}
+
+p.size1{
+  font-size: 14px;
+	line-height: 0.5;
+}
+
+p.size2{
+  font-size: 16px;
+	line-height: 0.5;
+}
+
+.wrapper {
+  width: 100%;
+  height: 100%;
+  transition: background 1s;
+
+}

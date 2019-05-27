@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title> Электронная очередь РБ 1.0.0 - кухонный монитор</title>
+    <link href="css/stylereklama.css" rel="stylesheet" type="text/css">
+
+</head>
+<body>
+
+
+
+<div class="wrapper"></div>
+
+
+
+    <script>
+
+
+    function start(w, d) {
+    	w.onload = function () {
+    		var wp = d.querySelector('.wrapper'),
+            colors = ['url(reklama/1.jpg)', 'url(reklama/2.jpg)', 'url(reklama/3.jpg)' ],
+            ln = colors.length;
+
+        var changeColor = function (i) {
+          if (i < ln) {
+            setTimeout(function () {
+              wp.style.cssText = "background: " + colors[i] +";";
+              i++;
+              changeColor(i);
+            }, 20000);
+          } else {
+            changeColor(0);
+          }
+        };
+
+        changeColor(0);
+      };
+    };
+    console.log("Скрипт работает");
+    start(window, document);
+
+    </script>
+
+</body>
+</html>
