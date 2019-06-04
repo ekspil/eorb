@@ -1,7 +1,7 @@
 const conf  = {
 
     restoran: '1',
-    ip: 'localhost',
+    ip: '0.0.0.0',
     ioIp: '10.12.0.23',
     ioPort: '3000',
     port: '4000',

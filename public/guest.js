@@ -1,20 +1,4 @@
 
-let conf = import('/confIo.js')
-    .then(module => {
-        conf = module.conf;
-        console.log(conf);
-        startApp(conf);
-
-
-    })
-    .catch(err => {
-        console.log(err);
-    });
-
-
-
-function startApp(conf) {
-
 
 var port = conf.ioPort;
 var server = conf.ioIp;//window.location.hostname;
@@ -541,4 +525,4 @@ if (!manager){
 
 });
 }
-}
+

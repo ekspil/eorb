@@ -1,8 +1,8 @@
-export const conf  = {
+const conf  = {
 
-    restoran: '1',
-    ioIp: '10.12.0.23',
-    ioPort: '3000',
+    restoran: 99,
+    ioIp: '192.168.15.166',
+    ioPort: '4000',
 
 };
 

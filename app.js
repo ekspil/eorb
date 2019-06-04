@@ -59,18 +59,19 @@ app.get('/kitchenNew', function(req,res){
 //
 //
 app.get('/newCheck', function(req,res){
-logger.info(req.query.name+' Get запрос принят ');
+//logger.info(req.query.name+' Get запрос принят ');
 // Необходимо следущее
 //id
 //name
 jsonCheck[req.query.id] = {};
-logger.info("Name = "+req.query.name);
+//logger.info("Name = "+req.query.name);
 jsonCheck[req.query.id].name = req.query.name;
-logger.info("jsonCheck[req.query.id].name = "+jsonCheck[req.query.id].name);
+//logger.info("jsonCheck[req.query.id].name = "+jsonCheck[req.query.id].name);
 jsonCheck[req.query.id].id = req.query.id;
 jsonCheck[req.query.id].ready = 0;
 jsonCheck[req.query.id].payed = 1;
 jsonCheck[req.query.id].checkType = req.query.checkType;
+jsonCheck[req.query.id].checkSum = req.query.checkSum;
 ioc.emit('checkAdd_s', req.query, (data) => {
 //  console.log(data); // data will be 'woot'
 });

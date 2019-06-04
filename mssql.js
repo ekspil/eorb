@@ -1,53 +1,66 @@
 const sql = require('mssql');
 const {config} = require('./conf');
 // Create connection to database
-
+let errorMsg = []
 const pool = new sql.ConnectionPool(config);
-pool.connect(err => {
-  if(err){
-  console.log(err);
-  }
-})
 
-
+setInterval(registerErr, 30000)
 
 
 async function register(timemsg) {
       try {
-//console.log(sql.connect);
 
-
-          let result1 = await pool.request()
+          await pool.connect()
+          await pool.request()
               .input('restoran', sql.Int, timemsg.restoran)  //timemsg.checkNumber = element.unit;
               .query("INSERT INTO eotimers.dbo.timers (restoran, rbdateYear, rbdateMonth, rbdateDay, rbdatehhmmss, rbtimerValue, checkNumber) VALUES (@restoran, "+timemsg.dateYear+", "+timemsg.dateMonth+", "+timemsg.dateDay+", '"+timemsg.dateTime+"', "+timemsg.timerValue+", '"+timemsg.checkNumber+"');")
+          await pool.close()
 
-          //console.dir(result1)
-
-          // Stored procedure
-
-        //  let result2 = await pool.request()
-        //      .input('input_parameter', sql.Int, value)
-        //      .output('output_parameter', sql.VarChar(50))
-        //      .execute(console.log('hello2'))
-//
-      //    console.dir(result2)
       }
       catch (err) {
-        console.log(err);
-          // ... error checks
+        const date = new Date()
+        console.log("Ошибка-SQL-request " + date + " Данные будут переданы позже")
+        errorMsg.push(timemsg)
+
       }
 
+}
 
-  sql.on('error', err => {
-    console.log(err);
-      // ... error handler
-  })
+async function registerErr() {
+    if(errorMsg.length > 0){
+        try {
 
+            await pool.connect()
+            while (errorMsg.length > 0) {
+                let msg = errorMsg.pop()
+                await pool.request()
+                    .input('restoran', sql.Int, msg.restoran)  //timemsg.checkNumber = element.unit;
+                    .query("INSERT INTO eotimers.dbo.timers (restoran, rbdateYear, rbdateMonth, rbdateDay, rbdatehhmmss, rbtimerValue, checkNumber) VALUES (@restoran, "+msg.dateYear+", "+msg.dateMonth+", "+msg.dateDay+", '"+msg.dateTime+"', "+msg.timerValue+", '"+msg.checkNumber+"');")
+
+
+            }
+
+            await pool.close()
+            console.log("Все сохраненные данные переданы!")
+        }
+        catch (err) {
+            const date = new Date()
+            console.log("Попытка передать отложенные данные неудачна: " + date)
+
+
+        }
+    }
 
 
 }
 
 
+sql.on('error', err => {
+    const date = new Date()
+    console.log("Ошибка-SQL" + date)
+    console.log(err)
+
+})
 
 
 exports.register = register;
