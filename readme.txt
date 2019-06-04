@@ -1,17 +1,19 @@
-Óñòàíîâêà êàê ñëóæáû windows
+Ð—Ð°Ð¿ÑƒÑÐº ÐºÐ°Ðº ÑÐµÑ€Ð²Ð¸Ñ windows
 
 
-Óñòàíîâêà:
+Ð¡Ð¿ÐµÑ€Ð²Ð° ÑÑ‚Ð°Ð²Ð¸Ð¼:
 
 npm install -g qckwinsvc
-Óñòàíîâêà ñëóæáû:
+Ð—Ð°Ñ‚ÐµÐ¼ Ð²Ñ‹Ð¿Ð¾Ð»Ð½ÑÐµÐ¼ ÑÐ»ÐµÐ´ÑƒÑŽÑ‰Ð¸Ðµ ÐºÐ¾Ð¼Ð°Ð½Ð´Ñ‹:
 
 > qckwinsvc
 prompt: Service name: [name for your service]
 prompt: Service description: [description for it]
 prompt: Node script path: [path of your node script]
 Service installed
-Óäàëåíèå ñëóæáû:
+
+
+Ð£Ð´Ð°Ð»ÐµÐ½Ð¸Ðµ ÑÐµÑ€Ð²Ð¸ÑÐ°:
 
 > qckwinsvc --uninstall
 prompt: Service name: [name of your service]
