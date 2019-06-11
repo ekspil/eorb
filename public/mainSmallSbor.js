@@ -85,7 +85,7 @@
                             var elemmsg = {};
                             elemmsg = positions[changeid].string[key].id[key2];
                             socket.emit('del', elemmsg, (data) => {
-                                console.log(data);
+
                             });
                         }
 
@@ -94,7 +94,7 @@
 
 
                     elem.remove();
-
+                    delete positions[changeid];
 
                 }
 
