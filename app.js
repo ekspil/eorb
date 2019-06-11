@@ -72,6 +72,7 @@ jsonCheck[req.query.id].ready = 0;
 jsonCheck[req.query.id].payed = 1;
 jsonCheck[req.query.id].checkType = req.query.checkType;
 jsonCheck[req.query.id].checkSum = req.query.checkSum;
+jsonCheck[req.query.id].flag = req.query.flag;
 ioc.emit('checkAdd_s', req.query, (data) => {
 //  console.log(data); // data will be 'woot'
 });
@@ -101,6 +102,7 @@ jsonPosition[req.query.id].id = req.query.id;
 jsonPosition[req.query.id].unit = req.query.unit;
 jsonPosition[req.query.id].station = req.query.station;
 jsonPosition[req.query.id].checkType = req.query.checkType;
+jsonPosition[req.query.id].flag = req.query.flag;
 
 ioc.emit('test', req.query, (data) => {
   //console.log(data);

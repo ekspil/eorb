@@ -1,5 +1,4 @@
 
-
 var port = conf.ioPort;
 var server = conf.ioIp;//window.location.hostname;
 var socket = io.connect(server + ':' + port);
@@ -43,7 +42,7 @@ function getUrlVars() {
 
 var station = getUrlVars()["station"];  //Определяем значение станции 0 - все, 1 - бургеры, 2 - фри, 3 - прочее
 var manager = getUrlVars()["manager"];  //Для менеджера необходимо показать развернутую информацию если равно 1
-
+let flag =  getUrlVars()["flag"] || "";
 
 
 setInterval(function(){
@@ -73,14 +72,22 @@ window.location.reload();
 socket.emit('hello', urlArray[1], (data) => {
   console.log(data);
 if(urlArray[1] == "guests"){
+
   for (var key in data){
+      data.sound = "on";
     if (data[key].ready == 0){
       //Неготовые чеки надо отправить в раздел готовится
-      addCheckToNotReady(data[key]);
+       if(flag == data[key].flag || flag == "ADMIN"){
+           addCheckToNotReady(data[key]);
+       }
+
     }
     else if (data[key].ready == 1) {
       //Готовые чеки надо отправить в раздел готово
+        if(flag == data[key].flag || flag == "ADMIN"){
+      data[key].sound = "off";
       addCheckToReady(data[key]);
+        }
     }}}
 else if(urlArray[1] == "kitchen"){
     for (var key in data){
@@ -95,16 +102,20 @@ else if(urlArray[1] == "kitchen"){
 //  Ефремов А.В.   Функция добавления в ЭО целых чеков
 //
 socket.on('checkAdd', function(userData){
+    if(flag == userData.flag || flag == "ADMIN"){
+        userData.sound = "on"
     console.log('Добавлена позиция | ' + userData.Name);
     addCheckToNotReady(userData);
 
     messagesBox.scrollTop(messagesBox.prop('scrollHeight'));
-});
+}});
 
 //
 //  Ефремов А.В.   Функция перевода чеков в разряд готовых
 //
 socket.on('checkToReady', function(msgf){
+    if(flag == msgf.flag || flag == "ADMIN"){
+        msgf.sound = "on"
     console.log('checkToReady ' + msgf.id);
     removeAllFromNotReady(msgf);
 
@@ -112,7 +123,7 @@ socket.on('checkToReady', function(msgf){
     messagesBox.scrollTop(messagesBox.prop('scrollHeight'));
 
 
-});
+}});
 
 socket.on('checkEnd', function(userData){
     console.log('checkEnd ' + userData.id);
@@ -131,43 +142,6 @@ socket.on('checkDel', function(msg){
 });
 
 
-//
-//  Ефремов А.В.   Функция добавления в ЭО отдельных позиций для монитора кухни
-//
-socket.on('test', function(userData){
-  //  console.log('Добавлена позиция на кухонный монитор');
-//    console.log(userData.name);
-  //  $('#messages').append('<div class="uk-panel uk-panel-box uk-panel-box-success uk-width-4-5 uk-align-left uk-margin-top-remove animated flipInX" id="info-message">Пользователь <b>'+userData.userName+'</b> присоединился к чату!</div>');
-var st = userData.station;  // Задаем соотвествие станции готовки и блюдам
-
-if (station == st || station== 0){
-    addUserToList(userData);
-    messagesBox.scrollTop(messagesBox.prop('scrollHeight'));
-  }
-  //  $('input[name="message"]').focus();
-});
-/*
-socket.on('clientsList', function(clientsList){
-    console.log(clientsList);
-    for(var key in clientsList){
-        if($('#'+key).length == 0){
-            addUserToList(clientsList[key]);
-        }
-    }
-});
-
-socket.on('messageToClients', function(msg, name){
-    console.log(name + ' | => ' + msg);
-     $('#messages').append('<div class="uk-panel uk-panel-box  uk-panel-box-secondary uk-width-4-5 uk-align-right uk-margin-top-remove animated flipInX" id="user-message"><div class="uk-badge uk-badge-success uk-badge-notification" id="this-user-name">'+name+'</div>'+msg+'</div>');
-    messagesBox.scrollTop(messagesBox.prop('scrollHeight'));
-});
-
-socket.on('messageFromClients', function(msg, name){
-    console.log(name + ' | => ' + msg);
-     $('#messages').append('<div class="uk-panel uk-panel-box uk-panel-box-primary uk-width-4-5 uk-align-left uk-margin-top-remove  animated flipInX"><div class="uk-badge uk-badge-notification" id="user-name">'+name+'</div>'+msg+'</div>');
-     messagesBox.scrollTop(messagesBox.prop('scrollHeight'));
-});
-*/
 var color = new Array;
 color[0] = 'red';
 color[1] = 'blue';
@@ -270,7 +244,9 @@ else if (userData.checkType == 3){
 
 }
   else {
-    playSound();
+    if(userData.sound != "off"){
+        playSound();
+    }
     $('#ready-list').append('<a href="javascript://" onclick="alert(massageAlert);" class="uk-panel uk-width-1-1  uk-panel-box-hidden-right   uk-margin-top-remove animated flipInX" id='+userData.id+'><div class="uk-text-center"><b>'+userData.id+'</b></div></a>');
 }
 }
@@ -445,25 +421,37 @@ $('a[pid]').click(function(){
 if (urlArray[1] == "guests"){
 $(document).ready(function(){
 if (!manager){
-  var videonum = 1;
-  setInterval(function(){
+//   var videonum = 1;
+//   setInterval(function(){
+//
+//     if(videonum > 5){
+//       videonum =1;
+//     }
+//     $('#bg-img').empty();
+//     $('#bg-img').append(
+//       `
+//       <video autoplay loop muted playsinline uk-cover>
+//
+//           <source src="/video/`+videonum+`234.mp4" type="video/mp4" autostart="true">
+//
+//       </video>
+//
+//       `
+//     );
+//   videonum++;
+// }, 10000);
 
-    if(videonum > 5){
-      videonum =1;
-    }
     $('#bg-img').empty();
-    $('#bg-img').append(
+         $('#bg-img').append(
       `
-      <video autoplay loop muted playsinline uk-cover>
+        <video autoplay loop muted playsinline uk-cover>
           
-          <source src="/video/`+videonum+`234.mp4" type="video/mp4" autostart="true">
+           <source src="/video/1234.mp4" type="video/mp4" autostart="true">
 
-      </video>
+       </video>
 
-      `
-    );
-  videonum++;
-}, 10000);
+       `
+     );
 
   $('#client-box').append(`
 
