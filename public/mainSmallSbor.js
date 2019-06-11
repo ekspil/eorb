@@ -20,6 +20,7 @@
 
     var station = getUrlVars()["station"];  //Определяем значение станции 0 - все, 1 - бургеры, 2 - фри, 3 - прочее
     var manager = getUrlVars()["manager"];  //Для менеджера необходимо показать развернутую информацию если равно 1
+    let flag =  getUrlVars()["flag"] || "";
     var positions = {};
 
 
@@ -509,9 +510,22 @@
 
         for (var key in data) {
             //Возвращаем при запуске все блюда на место
-            if (data[key].station == station || station == 0) {
-                addPositions(data[key], 0);
+            if(manager == 1){
+                if(flag == data[key].flag || flag == "ADMIN"){
+                    if (data[key].station == station || station == 0) {
+                        addPositions(data[key], 0);
+                    }
+                }
+
             }
+            else{
+                if(flag == data[key].flag || flag == "ADMIN"){
+                if (data[key].station == station || station == 0) {
+                    addPositions(data[key], 0);
+                }
+            }
+            }
+
         }
 
     });
@@ -521,13 +535,19 @@
 
         for (var key in data) {
             //Возвращаем при запуске все блюда на место
-            if (data[key].payed == 1) {
-                checkPayed(data[key]);
-                //console.log(data[key]);
+            if(flag == data[key].flag || flag == "ADMIN"){
+
+
+                if (data[key].payed == 1) {
+                    checkPayed(data[key]);
+                    //console.log(data[key]);
+                }
+                if (data[key].ready == 1) {
+                    changeColorById(data[key]);
+                }
+
             }
-            if (data[key].ready == 1) {
-                changeColorById(data[key]);
-            }
+
 
 
         }
@@ -538,15 +558,14 @@
 //  Ефремов А.В.   Функция добавления в ЭО целых чеков
 //
     socket.on('checkAdd', function (userData) {
+        if(flag == userData.flag || flag == "ADMIN"){
         console.log('Оплачен чек | ' + userData.id);
         checkPayed(userData);
-        addCheckToNotReady(userData);
 
-    });
+    }});
 
     socket.on('checkToReady', function (msgf) {
         console.log('Чек готов к выдаче | ' + msgf.id);
-        removeAllFromNotReady(msgf);
         changeColorById(msgf);
         messagesBox.scrollTop(messagesBox.prop('scrollHeight'));
 
@@ -575,12 +594,12 @@
 //
     socket.on('test', function (userData) {
         var st = userData.station;  // Задаем соотвествие станции готовки и блюдам
-
+        if(flag == userData.flag || flag == "ADMIN"){
         if (station == st || station == 0) {
             addPositions(userData, 0);
 
         }
-    });
+    }});
 
 
     socket.on('delete', function (userData) {
@@ -640,7 +659,6 @@
 
     }
 
-
     function removeAllFromNotReady(element) {
 
         $('#notready-list').find('#' + element.id).each(function () {
@@ -659,6 +677,7 @@
         var elem = $(element);
         var elemmsg = {};
         elemmsg.id = elem[0].id;
+        elemmsg.flag = flag;
         socket.emit('checkEnd_s', elemmsg, (data) => {
         });
 
@@ -673,6 +692,7 @@
         elemmsg.name = "Вы пользуетесь устаревшей версией сборщика, свяжитесь с ИТ службой для обновления";
         //console.log("Proverka elem");
         //console.log(elemmsg.name);
+        elemmsg.flag = flag;
         socket.emit('checkToReady_s', elemmsg, (data) => {
             //console.log(data);
         });
