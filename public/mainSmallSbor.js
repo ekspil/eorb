@@ -254,6 +254,7 @@
             if (!positions[data.unit]) {
                 positions[data.unit] = {};
                 positions[data.unit].string = {};
+                positions[data.unit].flag = data.flag;
                 positions[data.unit].string[string] = {};
                 positions[data.unit].string[string].string = string;
                 positions[data.unit].string[string].id = {};
@@ -677,7 +678,9 @@
         var elem = $(element);
         var elemmsg = {};
         elemmsg.id = elem[0].id;
-        elemmsg.flag = flag;
+        ;
+        elemmsg.flag = positions[elem[0].id].flag;
+
         socket.emit('checkEnd_s', elemmsg, (data) => {
         });
 
@@ -692,7 +695,7 @@
         elemmsg.name = "Вы пользуетесь устаревшей версией сборщика, свяжитесь с ИТ службой для обновления";
         //console.log("Proverka elem");
         //console.log(elemmsg.name);
-        elemmsg.flag = flag;
+        elemmsg.flag = positions[elem[0].id].flag;
         socket.emit('checkToReady_s', elemmsg, (data) => {
             //console.log(data);
         });
