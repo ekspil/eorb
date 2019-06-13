@@ -421,25 +421,6 @@ $('a[pid]').click(function(){
 if (urlArray[1] == "guests"){
 $(document).ready(function(){
 if (!manager){
-//   var videonum = 1;
-//   setInterval(function(){
-//
-//     if(videonum > 5){
-//       videonum =1;
-//     }
-//     $('#bg-img').empty();
-//     $('#bg-img').append(
-//       `
-//       <video autoplay loop muted playsinline uk-cover>
-//
-//           <source src="/video/`+videonum+`234.mp4" type="video/mp4" autostart="true">
-//
-//       </video>
-//
-//       `
-//     );
-//   videonum++;
-// }, 10000);
 
     $('#bg-img').empty();
          $('#bg-img').append(
@@ -460,7 +441,7 @@ if (!manager){
         <div class="uk-panel uk-panel-space"><div class="uk-panel-teaser">
     <img onclick="playSound()" class ="uk-align-center" src="/data/notready.png" alt="">
     </div></div><br>
-<div class="uk-grid uk-flex uk-flex-wrap uk-flex-column" id="notready-list"></div>
+<div class="uk-grid uk-flex uk-flex-wrap" id="notready-list"></div>
 
         </div>
     <div class="uk-width-2-10 " >
