@@ -1,11 +1,15 @@
+body {
+    margin: 0px;
+}
+
 
 
 #main {
     position: fixed;
     top: 0;
     bottom: 0;
-    left: 0;
-    right: 15px;
+    left: 0px;
+    right: 0px;
 }
 
 
@@ -22,23 +26,23 @@
 
 #user-name{
     position: absolute;
-    top: -10px;
-    left: 10px;
+    top: 0px;
+    left: 0px;
     }
 
 #unit{
         position: absolute;
-        top: -10px;
-        left: 10px;
+        top: 0px;
+        left: 0px;
     }
 
 #count {
 
-  width: 5%;
+  width: 0%;
   height: 50%;
   position:absolute;
   top: 25%;
-  right: 10px;
+  right: 0px;
   background: #fffceb;
   color: #e28327;
   border-color: rgba(226,131,39,.3);
@@ -54,8 +58,8 @@
 
 #this-user-name {
     position: absolute;
-    top: -10px;
-    right: 10px;
+    top: 0px;
+    right: 0px;
 }
 
 #message-form{
@@ -64,7 +68,7 @@
 }
 
 #messages {
-    padding: 10px;
+    padding: 0px;
     overflow-y: auto;
     overflow-x: hidden;
     height: 95%;
@@ -90,12 +94,12 @@
 }
 
 #sborka{
-    padding: 5px;
+    padding: 0px;
     overflow-x:hidden;
     overflow-y: auto;
     position:relative;
-    width: 101%;
-    left: 2%;
+    width: 100%;
+    left: 0%;
     height: 100%;
 }
 
@@ -106,7 +110,7 @@
     max-height: 80%;
     width: 105%;
     position:relative;
-    left: 20%;
+    left: 10%;
     transition: .1s;
 }
 
@@ -119,7 +123,7 @@
 
 #unit {
 
-  font-size: 20 px;
+  font-size: 20px;
 }
 
 b {
@@ -135,7 +139,7 @@ b {
 
 a {
   position:relative;
-  left: 5px;
+  left: 0px;
   transition: .4s;
 
 }
@@ -143,8 +147,8 @@ span {
   white-space: nowrap;
   position:relative;
   left: 0px;
-  margin-left: : 0px;
-  padding-left: : 0px;
+  margin-left: 0px;
+  padding-left:0px;
 
 
 }
@@ -156,7 +160,7 @@ a.uk-padding-vertical-remove {
   position: absolute;
   padding-top: 5px;
   margin-left: 0px;
-  left: 2px;
+  left:  2px;
   top: 20px;
   overflow-x: hidden;
   overflow-y: auto;
@@ -195,7 +199,6 @@ background-position: center;
     height: 90px;
     background: none;
     color: #659f13;
-    border-color: none;
     padding: 10px;
 }
 
@@ -203,7 +206,6 @@ background-position: center;
     height: 90px;
     background: none;
     color: #e28327;
-    border-color: none;
     padding: 10px;
 }
 
@@ -234,8 +236,8 @@ background-position: center;
   color: black;
   border-color: rgba(226,131,39,.3);
   height: 20px;
-  margin-left: : 0px;
-  padding-left: : 0px;
+  margin-left: 0px;
+  padding-left: 0px;
 }
 
 .uk-panel-box-sborka-ready {
@@ -327,4 +329,14 @@ p.size2{
   height: 100%;
   transition: background 1s;
 
+}
+.uk-grid {
+    margin-left: 0;
+    padding-left: 0px;
+}
+.uk-grid>* {
+    padding-left: 0px;
+}
+.uk-panel-space {
+    padding: 10px;
 }
