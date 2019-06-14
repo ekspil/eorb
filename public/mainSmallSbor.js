@@ -510,6 +510,9 @@
         console.log(data);
 
         for (var key in data) {
+            if(!data[key].flag){
+                data[key].flag = '';
+            }
             //Возвращаем при запуске все блюда на место
             if(manager == 1){
                 if(flag == data[key].flag || flag == "ADMIN"){
@@ -535,6 +538,9 @@
         console.log(data);
 
         for (var key in data) {
+            if(!data[key].flag){
+                data[key].flag = '';
+            }
             //Возвращаем при запуске все блюда на место
             if(flag == data[key].flag || flag == "ADMIN"){
 
@@ -559,6 +565,9 @@
 //  Ефремов А.В.   Функция добавления в ЭО целых чеков
 //
     socket.on('checkAdd', function (userData) {
+        if(!userData.flag){
+            userData.flag = '';
+        }
         if(flag == userData.flag || flag == "ADMIN"){
         console.log('Оплачен чек | ' + userData.id);
         checkPayed(userData);
@@ -594,6 +603,9 @@
 //  Ефремов А.В.   Функция добавления в ЭО отдельных позиций для монитора кухни
 //
     socket.on('test', function (userData) {
+        if(!userData.flag){
+            userData.flag = '';
+        }
         var st = userData.station;  // Задаем соотвествие станции готовки и блюдам
         if(flag == userData.flag || flag == "ADMIN"){
         if (station == st || station == 0) {

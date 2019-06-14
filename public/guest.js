@@ -75,6 +75,9 @@ if(urlArray[1] == "guests"){
 
   for (var key in data){
       data.sound = "on";
+      if(!data[key].flag){
+          data[key].flag = '';
+      }
     if (data[key].ready == 0){
       //Неготовые чеки надо отправить в раздел готовится
        if(flag == data[key].flag || flag == "ADMIN"){
@@ -91,6 +94,9 @@ if(urlArray[1] == "guests"){
     }}}
 else if(urlArray[1] == "kitchen"){
     for (var key in data){
+        if(!data[key].flag){
+            data[key].flag = '';
+        }
       //Возвращаем при запуске все блюда на место
       if(data[key].station == station || station == 0){
       addUserToList(data[key]);
@@ -102,6 +108,9 @@ else if(urlArray[1] == "kitchen"){
 //  Ефремов А.В.   Функция добавления в ЭО целых чеков
 //
 socket.on('checkAdd', function(userData){
+    if(!userData.flag){
+        userData.flag = '';
+    }
     if(flag == userData.flag || flag == "ADMIN"){
         userData.sound = "on"
     console.log('Добавлена позиция | ' + userData.Name);
@@ -114,6 +123,9 @@ socket.on('checkAdd', function(userData){
 //  Ефремов А.В.   Функция перевода чеков в разряд готовых
 //
 socket.on('checkToReady', function(msgf){
+    if(!msgf.flag){
+        msgf.flag = '';
+    }
     if(flag == msgf.flag || flag == "ADMIN"){
         msgf.sound = "on"
     console.log('checkToReady ' + msgf.id);

@@ -221,8 +221,8 @@ background-position: center;
 }
 .uk-panel-box-sborkasmall {
 
-    background: #fffceb;
-    color: #543E00;
+    background: #fff9d4;
+    color: black;
     border-color: rgba(226,131,39,.3);
     height: 50%;
 
@@ -252,8 +252,8 @@ background-position: center;
 
 .uk-panel-box-sborkasmall-ready {
 
-  background: #99ff33;
-  color: #659f13;
+  background: #a6e9d7;
+  color: black;
   border-color: rgba(101,159,19,.3);
     height: 50%;
 
@@ -262,8 +262,8 @@ background-position: center;
 
 .uk-panel-box-sborkasmall-readydost {
 
-  background: #000000;
-  color: #659f13;
+  background: #c6df5f;
+  color: black;
   border-color: rgba(101,159,19,.3);
     height: 50%;
 
@@ -282,8 +282,8 @@ background-position: center;
 
 .uk-panel-box-sborkasmall-payed {
 
-  background: #99ffff;
-  color: #003647;
+  background: #ffc0d1;
+  color: black;
   border-color: rgba(101,159,19,.3);
     height: 50%;
 
@@ -292,8 +292,8 @@ background-position: center;
 
 .uk-panel-box-sborkasmall-dost {
 
-  background: #ff9494;
-  color: #003647;
+  background: #ffd000;
+  color: black;
   border-color: rgba(101,159,19,.3);
     height: 50%;
 
