@@ -237,7 +237,7 @@ if(!userData.name){
 
   }
   else {
-    $('#notready-list').append('<a href="javascript://" onclick="alert(massageAlert);" class="uk-panel uk-width-1-2   uk-panel-box-hidden-left   uk-margin-top-remove animated flipInX"  id='+userData.id+'><div class="uk-text-center"><b>'+userData.id+'</b></div></a>');
+    $('#notready-list').append('<a href="javascript://" onclick="alert(massageAlert);" class="uk-panel uk-width-1-2   uk-panel-box-hidden-left   uk-margin-top-remove animated flipInX"  id='+userData.id+'><div class="uk-text-center"><b>'+userData.id+'</b></div><div class="uk-text-center"><h1>'+(userData.guestName || "  ")+'</h1></div></a>');
 }
 }
 //В готовые!
@@ -259,7 +259,7 @@ else if (userData.checkType == 3){
     if(userData.sound != "off"){
         playSound();
     }
-    $('#ready-list').append('<a href="javascript://" onclick="alert(massageAlert);" class="uk-panel uk-width-1-1  uk-panel-box-hidden-right   uk-margin-top-remove animated flipInX" id='+userData.id+'><div class="uk-text-center"><b>'+userData.id+'</b></div></a>');
+    $('#ready-list').append('<a href="javascript://" onclick="alert(massageAlert);" class="uk-panel uk-width-1-1  uk-panel-box-hidden-right   uk-margin-top-remove animated flipInX" id='+userData.id+'><div class="uk-text-center"><b>'+userData.id+'</b></div><div class="uk-text-center"><h1>'+(userData.guestName || "   ")+'</h1></div></a>');
 }
 }
 function removeAll(element){
@@ -450,15 +450,15 @@ if (!manager){
 
 
     <div class="uk-width-4-10 " >  <!--   "uk-width-1-5 uk-hidden-small uk-hidden-mini"      -->
-        <div class="uk-panel uk-panel-space"><div class="uk-panel-teaser">
+        <div class="uk-panel uk-panel-space"><div class="uk-panel-teaser notready-img">
     <img onclick="playSound()" class ="uk-align-center" src="/data/notready.png" alt="">
     </div></div><br>
 <div class="uk-grid uk-flex uk-flex-wrap" id="notready-list"></div>
 
         </div>
     <div class="uk-width-2-10 " >
-      <div class="uk-panel uk-panel-space "><div class="uk-panel-teaser " id="panelTeaser">
-    <img class ="uk-align-center" src="/data/ready.png" alt="">
+      <div class="uk-panel uk-panel-space "><div class="uk-panel-teaser ready-img " id="panelTeaser">
+    <img class ="uk-align-center " src="/data/ready.png" alt="">
     </div></div><br>
 <div class="uk-grid" id="ready-list"></div>
     </div>

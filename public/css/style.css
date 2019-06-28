@@ -83,13 +83,13 @@ body {
 }
 
 #notready-list{
-    padding: 10px;
+    padding: 0px;
     overflow-x:hidden;
-    overflow-y: auto;
+    overflow-y: hidden;
     max-height: 80%;
-    width: 95%;
+    width: 100%;
     position:relative;
-    left: 5%;
+    left: 0%;
     transition: height .4s;
 }
 
@@ -104,19 +104,19 @@ body {
 }
 
 #ready-list{
-    padding: 10px;
+    padding: 0px;
     overflow-x: hidden;
     overflow-y: hidden;
     max-height: 80%;
-    width: 105%;
+    width: 100%;
     position:relative;
-    left: 10%;
+    left: 0%;
     transition: .1s;
 }
 
 #panelTeaser{
 
-  width: 140%;
+  width: 100%;
   position:relative;
   left: 0%;
 }
@@ -196,17 +196,25 @@ background-position: center;
 
 .uk-panel-box-hidden-right {
 
-    height: 90px;
-    background: none;
+    height: 100px;
+    background: #d2f997;
     color: #659f13;
-    padding: 10px;
+    padding: 15px;
+    margin-bottom: 1%;
+    margin-right: 3%;
+    margin-left: 3%;
+    width: 95%;
 }
 
 .uk-panel-box-hidden-left{
-    height: 90px;
-    background: none;
-    color: #e28327;
-    padding: 10px;
+    height: 100px;
+    width: 46%;
+    margin-bottom: 1%;
+    margin-right: 0%;
+    margin-left: 3%;
+    background: #bffefb;
+    color: #2d7091;
+    padding: 15px;
 }
 
 .uk-panel-box-sborka {
@@ -230,7 +238,20 @@ background-position: center;
 
 }
 
+.ready-img {
 
+    border-bottom-width:6px;
+    border-bottom-color: #659f13;
+    border-bottom-style: solid;
+
+}
+.notready-img {
+
+    border-bottom-width: 6px;
+    border-bottom-color: #2d7091;
+    border-bottom-style: solid;
+
+}
 .uk-panel-teaser-sbor {
   background: #FFBC00;
   color: black;
@@ -338,5 +359,9 @@ p.size2{
     padding-left: 0px;
 }
 .uk-panel-space {
-    padding: 10px;
+    margin-left: 0%;
+    padding-left: 3%;
+    padding-right: 2%;
+    padding-top: 5px;
+    padding-bottom: 0px;
 }
