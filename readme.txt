@@ -20,3 +20,7 @@ prompt: Service name: [name of your service]
 prompt: Node script path: [path of your node script]
 Service stopped
 Service uninstalled
+
+
+qckwinsvc --name "eo" --description "EO" --script "C:\eo\app.js" --startImmediately
+
