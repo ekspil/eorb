@@ -24,3 +24,11 @@ Service uninstalled
 
 qckwinsvc --name "eo" --description "EO" --script "C:\eo\app.js" --startImmediately
 
+//Пояснения
+
+conf.js - настройки backend
+confIo.js - настройки front
+
+mainSmallSbor.js - основная логика фронта
+app.js - основная логика бэка
+mssql.js - отправка данных по времени сбора
