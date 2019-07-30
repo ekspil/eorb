@@ -63,6 +63,11 @@
 
 
                     if (positions[changeid].checkType < 3) {
+                        if(positions[changeid].checkNum){
+
+                            timemsg[changeid].checkNum = positions[changeid].checkNum
+                        }
+                        timemsg[changeid].checkNum = positions[changeid].checkNum
                         socket.emit('timer', timemsg[changeid], (data) => {
                             //console.log(data);
                             delete timemsg[changeid];
@@ -211,6 +216,8 @@
 //console.log(positions);
         if (positions[data.id]) {
             positions[data.id].checkType = data.checkType;
+            positions[data.id].checkNum = data.checkNum;
+
         }
         var elem = $('#' + data.id);
         if (data.checkType == 3) {
