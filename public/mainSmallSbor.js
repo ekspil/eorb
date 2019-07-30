@@ -59,6 +59,8 @@
                 if (positions[changeid].ready != 1) {
                     removeFromNotReady(elem);
                     positions[changeid].ready = 1;
+                    timemsg[changeid].body = "";
+
 
                     if (positions[changeid].checkType < 3) {
                         socket.emit('timer', timemsg[changeid], (data) => {

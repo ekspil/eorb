@@ -26,11 +26,6 @@ var manager = getUrlVars()["manager"];  //Для менеджера необхо
 var positions = {};
 
 
-//Полноэкранный режим
-
-// TEST
-
-
 function changeColor(th){
 
 var elem = $(th);
@@ -903,7 +898,7 @@ if (!manager){
     <div class="uk-width-1-5 uk-cover-background uk-position-relative" id="bg-img">
 
     <img class ="uk-align-right uk-responsive-width" src="/bg.png" alt="">
-    <div class="uk-position-cover uk-flex uk-flex-right uk-flex-middle">...</div
+    <div class="uk-position-cover uk-flex uk-flex-right uk-flex-middle">...</div>
 
     </div>
     </div>
