@@ -175,6 +175,13 @@ background-repeat: no-repeat;
 background-position: center;
 
 }
+
+.appCode{
+    position: relative;
+    top: 93%;
+    left: 65%;
+    color: #ffbc00
+}
 .uk-panel-box-primary {
 
   min-height: 0px;

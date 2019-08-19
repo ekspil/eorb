@@ -73,6 +73,12 @@ jsonCheck[req.query.id].payed = 1;
 jsonCheck[req.query.id].checkType = req.query.checkType;
 jsonCheck[req.query.id].checkSum = req.query.checkSum;
 jsonCheck[req.query.id].checkNum = req.query.checkNum;
+if(req.query.code){
+    jsonCheck[req.query.id].code = req.query.code;
+}else {
+    jsonCheck[req.query.id].code = "";
+}
+
 console.log(req.query)
 jsonCheck[req.query.id].flag = req.query.flag;
 ioc.emit('checkAdd_s', req.query, (data) => {

@@ -53,7 +53,7 @@
 
                 elem.removeClass('uk-panel-box-sborkasmall').addClass('uk-panel-box-sborkasmall-ready');
                 elem.removeClass('uk-panel-box-sborkasmall-payed').addClass('uk-panel-box-sborkasmall-ready');
-                if (positions[changeid].checkType == 3) {
+                if (positions[changeid].checkType == 3 || positions[changeid].checkType == 4 || positions[changeid].checkType == 5) {
                     elem.removeClass('uk-panel-box-sborkasmall-dost').addClass('uk-panel-box-sborkasmall-readydost');
                 }
                 if (positions[changeid].ready != 1) {
@@ -121,7 +121,7 @@
         var changeid = data.id;
         elem.removeClass('uk-panel-box-sborkasmall').addClass('uk-panel-box-sborkasmall-ready');
         elem.removeClass('uk-panel-box-sborkasmall-payed').addClass('uk-panel-box-sborkasmall-ready');
-        if (data.checkType == 3) {
+        if (data.checkType == 3 || data.checkType == 4 || data.checkType == 5) {
             elem.removeClass('uk-panel-box-sborkasmall-dost').addClass('uk-panel-box-sborkasmall-readydost');
         }
 
@@ -140,15 +140,18 @@
     }
 
     function changeColorDel(th) {
+
         var elem = $(th);
         var elemmsgdel = {};
         elemmsgdel.id = elem[0].id;
         var changeid = elem[0].id;
+
         if (manager == 1) {
 
             socket.emit('checkDel_s', elemmsgdel, (data) => {
                 //console.log(data);
             });
+
             for (var key in positions[changeid].string) {
 
                 for (var key2 in positions[changeid].string[key].id) {
@@ -201,6 +204,12 @@
             if (data.checkType == 3) {
                 checkTypeText = "Доставка";
             }
+            if (data.checkType == 4) {
+                checkTypeText = "APP на вынос";
+            }
+            if (data.checkType == 5) {
+                checkTypeText = "APP в зале";
+            }
         }
         else {
             checkTypeText = "Не передано";
@@ -220,7 +229,7 @@
 
         }
         var elem = $('#' + data.id);
-        if (data.checkType == 3) {
+        if (data.checkType == 3 || data.checkType == 4 || data.checkType == 5) {
             elem.removeClass('uk-panel-box-sborkasmall').addClass('uk-panel-box-sborkasmall-dost');
         }
         else {
@@ -241,6 +250,12 @@
         var elemCheckType = $('#checkType' + data.id);
         elemCheckType.empty();
         elemCheckType.append(checkTypeText);
+        var elemCheckCode = $('#checkCode' + data.id);
+        elemCheckCode.empty();
+        if(data.code){
+            elemCheckCode.append("app code: "+String(data.code));
+        }
+
     }
 
 
@@ -445,6 +460,7 @@
         $('#sborka').append(`<a href="javascript://" ondblclick="changeColorDel(this);" onclick="changeColor(this);" class="uk-panel uk-width-1-5 uk-panel-box  uk-panel-box-sborkasmall uk-animation-shake"  id="` + data.unit + `"><div class="uk-panel uk-grid uk-grid-collapse uk-panel-teaser uk-panel-teaser-sbor uk-text-bold "><div class ="uk-width-1-4 uk-text-right" >` + data.unit + ` </div><div class="uk-width-2-4 uk-text-center" id="checkType` + data.unit + `">` + checkTypeText + `</div> <div class="uk-width-1-4 uk-text-left" id="timer` + data.unit + `">00:00</div></div><div class="list-of-products" id="list` + data.unit + `">
   <span uk-panel uk-grid uk-grid-collapse id="` + data.string + `"><p class="line size2" id="pline"><span id="num">1 x </span><span id="position">` + data.name + `</span></p></span>
   </div>
+  <p class="appCode" id="checkCode`+ data.unit +`"></p>
   </a>`);
 
         timer(data);
