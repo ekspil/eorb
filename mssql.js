@@ -20,6 +20,7 @@ async function register(timemsg) {
       catch (err) {
         const date = new Date()
         console.log("Ошибка-SQL-request " + date + " Данные будут переданы позже")
+        console.log(err)
         errorMsg.push(timemsg)
 
       }
@@ -46,6 +47,7 @@ async function registerErr() {
         catch (err) {
             const date = new Date()
             console.log("Попытка передать отложенные данные неудачна: " + date)
+            console.log(err)
 
 
         }
