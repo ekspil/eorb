@@ -82,6 +82,8 @@ if(req.query.code){
 }
 if(req.query.guestName){
     jsonCheck[req.query.id].guestName = req.query.guestName;
+}else{
+    jsonCheck[req.query.id].guestName = ""
 }
 
 
@@ -186,6 +188,7 @@ io.on('connection', function(socket){
         jsonCheck[msg.id].ready =1;
       if(!msg.checkType){
         msg.checkType = jsonCheck[msg.id].checkType;
+        msg.guestName = jsonCheck[msg.id].guestName;
       }}
 
     socket.broadcast.emit('checkToReady', msg);
