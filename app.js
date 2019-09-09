@@ -59,6 +59,8 @@ app.get('/kitchenNew', function(req,res){
 //
 //
 app.get('/newCheck', function(req,res){
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Headers', 'origin, content-type, accept');
 //logger.info(req.query.name+' Get запрос принят ');
 // Необходимо следущее
 //id
@@ -78,6 +80,10 @@ if(req.query.code){
 }else {
     jsonCheck[req.query.id].code = "";
 }
+if(req.query.guestName){
+    jsonCheck[req.query.id].guestName = req.query.guestName;
+}
+
 
 console.log(req.query)
 jsonCheck[req.query.id].flag = req.query.flag;
@@ -89,6 +95,9 @@ res.sendStatus("200");
 });
 
 app.get('/delCheck', function(req,res){
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Headers', 'origin, content-type, accept');
+
 // Необходимо следущее
 //id
 ioc.emit('checkDel_s', req.query, (data) => {
@@ -101,6 +110,9 @@ res.sendStatus("200");
 //добавление позиции на кухонный монитор
 //
 app.get('/new', function(req,res){
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Headers', 'origin, content-type, accept');
+
 // Необходимо следущее
 //id
 //name
