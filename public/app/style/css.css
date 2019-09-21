@@ -1,0 +1,88 @@
+html {
+    height: 100%
+}
+body {
+    margin: 0px;
+    height: 100%;
+    font-size: medium;
+}
+#app {
+    height: 100%;
+    font-weight: bold;
+}
+.uk-height-1-2 {
+    height: 50%;
+}
+.uk-height-90 {
+    height: 95%;
+    width: 100%;
+}
+.uk-height-10 {
+    height: 5%;
+}
+
+.block-header {
+    background-color: #ffbc00;
+    overflow: hidden;
+}
+.normal-text {
+
+}
+.deleted-text {
+    text-decoration: line-through;
+    color: #babec2
+}
+.mods {
+    padding-left: 20%;
+    font-size: small;
+}
+.nomp {
+    margin: 0px;
+    padding: 0px;
+}
+
+.uk-grid {
+    margin-left: 0px;
+    padding-left: 0px;
+}
+.uk-grid>* {
+
+    margin-left: 0px;
+    padding-left: 0px;
+}
+.block {
+    border: 1px solid #ffbc00;
+    border-radius: 5px;
+}
+.all-start {
+    background-color: #fef8d4;
+    color: black;
+}
+.all-die {
+    background-color: black;
+    color: white;
+}
+.kassa-process {
+    background-color: #febfd0;
+    color: black;
+}
+.kassa-ready {
+    background-color: #a5e8d7;
+    color: black;
+}
+.delivery-process {
+    background-color: #fece01;
+    color: black;
+}
+.delivery-ready {
+    background-color: #c5de5f;
+    color: black;
+}
+.app-process {
+    background-color: #b378cd;
+    color: white;
+}
+.app-ready {
+    background-color: #8ba3ad;
+    color: white;
+}

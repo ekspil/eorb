@@ -75,6 +75,7 @@ jsonCheck[req.query.id].payed = 1;
 jsonCheck[req.query.id].checkType = req.query.checkType;
 jsonCheck[req.query.id].checkSum = req.query.checkSum;
 jsonCheck[req.query.id].checkNum = req.query.checkNum;
+jsonCheck[req.query.id].checkTime = Math.round(new Date().getTime()/1000);
 if(req.query.code){
     jsonCheck[req.query.id].code = req.query.code;
 }else {
@@ -182,6 +183,19 @@ io.on('connection', function(socket){
       delete jsonCheck[msg.id];
       socket.broadcast.emit('checkEnd', msg);
      });
+
+    socket.on('deleteOrder_allVersion', function(msg){
+        delete jsonCheck[msg.id];
+        for(let key in jsonPosition){
+            if(jsonPosition[key].unit == msg.id){
+                socket.broadcast.emit('delete', jsonPosition[key]);
+                delete jsonPosition[key]
+            }
+
+        }
+        socket.broadcast.emit('checkEnd', msg);
+        socket.broadcast.emit('checkDel', msg);
+    });
 
     socket.on('checkToReady_s', function(msg){
       if(jsonCheck[msg.id]){
