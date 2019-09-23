@@ -19,6 +19,7 @@ async function register(timemsg) {
       }
       catch (err) {
         const date = new Date()
+        pool.close()
         console.log("Ошибка-SQL-request " + date + " Данные будут переданы позже")
         console.log(err)
         errorMsg.push(timemsg)
