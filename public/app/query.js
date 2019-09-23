@@ -1,17 +1,17 @@
-const deliveryChangeStatus = async function (login, pass, server) {
-    const serverUrl = server || process.env.FISCAL_DEFAULT_SERVER
+const deliveryChangeStatus = async function (order_id, status) {
+    //accepted, production, cooked, sent, done, canceled(отменен)
     let axConf = {
         method: "get",
-        baseURL: `https://${serverUrl}/kkm-trade/atolpossystem/v4/getToken`,
+        baseURL: `https://delivery.rb24.ru/common_api/set_order_status/${order_id}/${status}`,
         params: {
-            "login": login,
-            "pass": pass
+            "apikey": "ZmFkMTlhNzQyMGRhMGI4N2NlOTQwZTI0MmQ3OTk1MTU3NjIwMmRkMA"
+
         }
 
     }
     return await axios(axConf)
         .then((response) => {
-            return response.data.token
+            return response.data.success
         })
 
 }

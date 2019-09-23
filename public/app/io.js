@@ -74,7 +74,7 @@ function sendToDie(order){
     }
     console.log(msg)
 
-    socket.emit('checkDel_s', msg, (data) => {
+    socket.emit('deleteOrder_allVersion', msg, (data) => {
         //console.log(data);
     });
     socket.emit('checkEnd_s', msg, (data) => {

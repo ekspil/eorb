@@ -232,17 +232,27 @@ var app = new Vue({
                 return order
             })
         },
-        nextStatus: function(order){
+        nextStatus: async function(order){
             if(!order.payed){
                 return false
             }
             if(order.ready){
+                if(order.checkType == 4 || order.checkType == 5){
+                    let resultR = await deliveryChangeStatus(order.order, "done")
+                    if(!resultR) return false
+                }
+
                 this.deleteOrder(order.order)
                 sendToDie(order)
             }
             if(!order.ready){
+                if(order.checkType == 4 || order.checkType == 5){
+                    let resultR = await deliveryChangeStatus(order.order, "cooked")
+                    if(!resultR) return false
+                }
                 this.readyOrder(order.order)
                 sendToReady(order)
+
             }
 
         },
