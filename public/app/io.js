@@ -58,7 +58,10 @@ function sendToReady(order){
         id: order.order,
         name: order.order,
         flag: order.flag,
-        guestName: order.guestName
+        guestName: order.guestName,
+        restoran: conf.restoran,
+        checkNumber: order.order,
+        checkNum: order.checkNum,
     }
     socket.emit('checkToReady_s', msg, (data) => {
         //console.log(data);

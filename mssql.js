@@ -12,7 +12,7 @@ async function register(timemsg) {
 
           await pool.connect()
           await pool.request()
-              .input('restoran', sql.Int, timemsg.restoran)  //timemsg.checkNumber = element.unit;
+              .input('restoran', sql.Int, Number(timemsg.restoran))  //timemsg.checkNumber = element.unit;
               .query("INSERT INTO eotimers.dbo.timers (restoran, rbdateYear, rbdateMonth, rbdateDay, rbdatehhmmss, rbtimerValue, checkNumber, checkNum) VALUES (@restoran, "+timemsg.dateYear+", "+timemsg.dateMonth+", "+timemsg.dateDay+", '"+timemsg.dateTime+"', "+timemsg.timerValue+", '"+timemsg.checkNumber+"', '"+timemsg.checkNum+"');")
           await pool.close()
 
