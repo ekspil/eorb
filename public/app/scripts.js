@@ -107,6 +107,11 @@ var app = new Vue({
         }
     },
     methods: {
+        checkStation: function(order){
+            let [any] = order.positions.filter(pos => pos.station == station)
+            if(!any && station != 0) return false
+            return true
+        },
         thistime: function(order){
             let time = Math.round(new Date().getTime()/1000) - Number(order.checkTime)
             let timemin = Number((time/60).toString().split(/\./)[0])

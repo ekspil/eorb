@@ -77,6 +77,7 @@ jsonCheck[req.query.id].checkType = req.query.checkType;
 jsonCheck[req.query.id].checkSum = req.query.checkSum;
 jsonCheck[req.query.id].checkNum = req.query.checkNum;
 jsonCheck[req.query.id].checkTime = Math.round(new Date().getTime()/1000);
+req.query.checkTime = jsonCheck[req.query.id].checkTime;
 if(req.query.code){
     jsonCheck[req.query.id].code = req.query.code;
 }else {

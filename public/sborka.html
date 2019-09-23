@@ -18,7 +18,7 @@
 <div id="app">
 <div class="uk-child-width-1-5 uk-height-1-1 uk-grid-collapse" uk-grid>
 
-    <div v-for="order in ordersList" class="uk-height-1-2 block" v-if="order.positions.length > 0 && flag === order.flag || flag == 'ADMIN' || flag == 'admin'" @click="nextStatus(order)" @dblclick="alertDelete(order)">
+    <div v-for="order in ordersList" class="uk-height-1-2 block" v-if="checkStation(order) && flag === order.flag || flag == 'ADMIN' || flag == 'admin'" @click="nextStatus(order)" @dblclick="alertDelete(order)">
         <div class="js-wrapper uk-height-1-1">
 
             <div class="uk-height-10 block-header" uk-grid>
