@@ -77,7 +77,4 @@ function sendToDie(order){
     socket.emit('deleteOrder_allVersion', msg, (data) => {
         //console.log(data);
     });
-    socket.emit('checkEnd_s', msg, (data) => {
-        //console.log(data);
-    });
 }
