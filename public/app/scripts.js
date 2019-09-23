@@ -199,6 +199,7 @@ var app = new Vue({
 
         },
         newOrder: function(data){
+            console.log(data)
             this.orders = this.orders.map(order => {
                 if(order.order != data.order){
                     return order
@@ -210,13 +211,13 @@ var app = new Vue({
                     order.payed = 1
                 }
 
-                if (order.ready) order.ready = data.ready
-                if (order.code) order.code = data.code
-                if (order.flag) order.flag = data.flag
-                if (order.guestName) order.guestName = data.guestName
-                if (order.checkSum) order.checkSum = data.checkSum
-                if (order.checkType) order.checkType = data.checkType
-                if (order.checkTime) order.checkTime = data.checkTime
+                if (data.ready) order.ready = data.ready
+                if (data.code) order.code = data.code
+                if (data.flag) order.flag = data.flag
+                if (data.guestName) order.guestName = data.guestName
+                if (data.checkSum) order.checkSum = data.checkSum
+                if (data.checkType) order.checkType = data.checkType
+                if (data.checkTime) order.checkTime = data.checkTime
                 return order
             })
 
@@ -248,7 +249,7 @@ var app = new Vue({
             }
             if(order.ready){
                 if(order.checkType == 4 || order.checkType == 5){
-                    deliveryChangeStatus(order.order, "done")
+                    deliveryChangeStatus({order_id: order.order, status: "done"})
                 }
 
                 this.deleteOrder(order.order)

@@ -31,6 +31,7 @@ socket.on('delete', function (userData) {
 
 //Прилетела информация чека
 socket.on('checkAdd', function (userData) {
+    console.log(userData)
     let newOrder = newOrderDTO(userData)
     app.newOrder(newOrder)
     });
