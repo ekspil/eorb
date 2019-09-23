@@ -1,6 +1,6 @@
 const deliveryChangeStatus = async function (order_id, status) {
     //accepted, production, cooked, sent, done, canceled(отменен)
-    console.log(order_id + "-" + status)
+
     let axConf = {
         method: "get",
         baseURL: `https://delivery.rb24.ru/common_api/set_order_status/${order_id}/${status}`,

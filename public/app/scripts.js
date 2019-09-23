@@ -159,9 +159,6 @@ var app = new Vue({
         deletePos: function(data){
                 let toDelete = -1
                 this.orders = this.orders.map((order, index) => {
-                    if(order.order != data.order){
-                        return order
-                    }
 
                     order.positions = order.positions.map(pos => {
                         if(pos.id != data.id) return pos
