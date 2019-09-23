@@ -62,6 +62,7 @@ function sendToReady(order){
         restoran: conf.restoran,
         checkNumber: order.order,
         checkNum: order.checkNum,
+        checkTime: order.checkTime,
     }
     socket.emit('checkToReady_s', msg, (data) => {
         //console.log(data);
