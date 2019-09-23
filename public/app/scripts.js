@@ -225,6 +225,7 @@ var app = new Vue({
                 if (data.guestName) order.guestName = data.guestName
                 if (data.checkSum) order.checkSum = data.checkSum
                 if (data.checkType) order.checkType = data.checkType
+                if (data.checkNum) order.checkNum = data.checkNum
                 if (data.checkTime) order.checkTime = data.checkTime
                 return order
             })
