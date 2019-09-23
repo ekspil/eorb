@@ -10,6 +10,14 @@ const newPosDTO = function(data) {
         station: data.station,
         mods: []
     }
+    if(newPos.name){
+        let mods = newPos.name.split("@")
+        if(mods.length > 1){
+            mods.shift()
+            newPos.mods.push(...mods)
+        }
+    }
+
     return newPos
 }
 const newOrderDTO = function(data) {

@@ -60,7 +60,6 @@ function sendToReady(order){
         flag: order.flag,
         guestName: order.guestName
     }
-    console.log(msg)
     socket.emit('checkToReady_s', msg, (data) => {
         //console.log(data);
     });
@@ -76,5 +75,12 @@ function sendToDie(order){
 
     socket.emit('deleteOrder_allVersion', msg, (data) => {
         //console.log(data);
+    });
+}
+
+function deliveryChangeStatus(msg){
+    console.log("io")
+    socket.emit('deliveryStatus', msg, (data) => {
+        console.log("Статус заказа "+msg.order_id+" сменен: "+ data);
     });
 }

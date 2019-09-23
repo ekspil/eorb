@@ -1,3 +1,5 @@
+
+
 var app = new Vue({
     el: '#app',
     data:{
@@ -145,8 +147,19 @@ var app = new Vue({
                     if(order.order != data.order){
                         return order
                     }
-                    order.positions.push(data)
-                    return order
+                    let [thispos] = order.positions.filter(pos => pos && pos.id == data.id)
+                    if (thispos){
+                        order.positions = order.positions.map(pos => {
+                            if(pos.id != data.id) return pos
+                            return data
+                        })
+                        return order
+
+                    }else{
+                        order.positions.push(data)
+                        return order
+                    }
+
                 })
             }
             else{
@@ -229,14 +242,13 @@ var app = new Vue({
                 return order
             })
         },
-        nextStatus: async function(order){
+        nextStatus: function(order){
             if(!order.payed){
                 return false
             }
             if(order.ready){
                 if(order.checkType == 4 || order.checkType == 5){
-                    let resultR = await deliveryChangeStatus(order.order, "done")
-                    if(!resultR) return false
+                    deliveryChangeStatus(order.order, "done")
                 }
 
                 this.deleteOrder(order.order)
@@ -244,8 +256,8 @@ var app = new Vue({
             }
             if(!order.ready){
                 if(order.checkType == 4 || order.checkType == 5){
-                    let resultR = await deliveryChangeStatus(order.order, "cooked")
-                    if(!resultR) return false
+                    deliveryChangeStatus({order_id: order.order, status: "cooked"})
+
                 }
                 this.readyOrder(order.order)
                 sendToReady(order)

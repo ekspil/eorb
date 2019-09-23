@@ -4,7 +4,7 @@ html {
 body {
     margin: 0px;
     height: 100%;
-    font-size: medium;
+    font-size: 14px;
 }
 #app {
     height: 100%;
@@ -16,9 +16,12 @@ body {
 .uk-height-90 {
     height: 95%;
     width: 100%;
+
+    line-height: 1.2;
 }
 .uk-height-10 {
     height: 5%;
+    line-height: 1.2;
 }
 
 .block-header {
@@ -26,7 +29,7 @@ body {
     overflow: hidden;
 }
 .normal-text {
-
+    font-size: 15px;
 }
 .deleted-text {
     text-decoration: line-through;
@@ -34,7 +37,7 @@ body {
 }
 .mods {
     padding-left: 20%;
-    font-size: small;
+    font-size: 10px;
 }
 .nomp {
     margin: 0px;

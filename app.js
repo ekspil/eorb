@@ -8,6 +8,7 @@ var ioc = require('socket.io-client')('http://'+conf.ip+':'+conf.port);
 var jsonCheck = {};
 var jsonPosition = {};
 var mssql = require('./mssql');
+const services = require('./services');
 
 server.listen(conf.port, conf.ip, function(){
     var addr = server.address();
@@ -177,6 +178,13 @@ io.on('connection', function(socket){
     socket.on('del', function(msg){
       delete jsonPosition[msg.id];
       socket.broadcast.emit('delete', msg);
+     });
+
+    socket.on('deliveryStatus', async function(msg, fn){
+
+        let result = await services.sendStatus(msg)
+        fn(result)
+
      });
 
     socket.on('checkEnd_s', function(msg){
