@@ -194,6 +194,17 @@ io.on('connection', function(socket){
      });
 
     socket.on('deleteOrder_allVersion', function(msg){
+        let time = Math.round(new Date().getTime()/1000);
+        let date = new Date()
+        msg.timerValue = time - msg.checkTime
+
+
+        msg.dateYear = date.getFullYear()
+        msg.dateMonth = date.getMonth()
+        msg.dateDay = date.getDate()
+        msg.dateTime = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+
+        mssql.register(msg)
         delete jsonCheck[msg.id];
         for(let key in jsonPosition){
             if(jsonPosition[key].unit == msg.id){
@@ -202,6 +213,7 @@ io.on('connection', function(socket){
             }
 
         }
+
         socket.broadcast.emit('checkEnd', msg);
         socket.broadcast.emit('checkDel', msg);
     });

@@ -69,9 +69,12 @@ function sendToDie(order){
         id: order.order,
         name: order.order,
         flag: order.flag,
-        guestName: order.guestName
+        guestName: order.guestName,
+        restoran: conf.restoran,
+        checkNumber: order.order,
+        checkNum: order.checkNum,
+
     }
-    console.log(msg)
 
     socket.emit('deleteOrder_allVersion', msg, (data) => {
         //console.log(data);

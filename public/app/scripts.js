@@ -110,6 +110,7 @@ var app = new Vue({
         checkStation: function(order){
             let [any] = order.positions.filter(pos => pos.station == station)
             if(!any && station != 0) return false
+            if(order.hide) return false
             return true
         },
         thistime: function(order){
@@ -252,6 +253,13 @@ var app = new Vue({
         },
         nextStatus: function(order){
             if(!manager){
+                this.orders = this.orders.map(ord =>{
+                    if(order.order == ord.order){
+                        ord.hide = true
+                        return ord
+                    }
+                    return ord
+                })
                 return false
             }
             if(!order.payed){
