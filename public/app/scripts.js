@@ -96,6 +96,9 @@ var app = new Vue({
 
                     return pos
                 })
+                if(!station || station != 0){
+                    newPos = newPos.filter(pos => pos.station == station)
+                }
                 order.positions = newPos
                 order.positions = skdn(order.positions)
                return order
@@ -199,7 +202,6 @@ var app = new Vue({
 
         },
         newOrder: function(data){
-            console.log(data)
             this.orders = this.orders.map(order => {
                 if(order.order != data.order){
                     return order
@@ -244,6 +246,9 @@ var app = new Vue({
             })
         },
         nextStatus: function(order){
+            if(!manager){
+                return false
+            }
             if(!order.payed){
                 return false
             }
