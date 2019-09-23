@@ -278,8 +278,9 @@ var app = new Vue({
                     deliveryChangeStatus({order_id: order.order, status: "cooked"})
 
                 }
-                this.readyOrder(order.order)
                 sendToReady(order)
+                this.readyOrder(order.order)
+
 
             }
 
