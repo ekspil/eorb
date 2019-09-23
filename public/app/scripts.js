@@ -254,10 +254,10 @@ var app = new Vue({
         nextStatus: function(order){
             if(!manager){
                 this.orders = this.orders.map(ord =>{
-                    if(order.order == ord.order){
-                        ord.hide = true
+                    if(order.order != ord.order){
                         return ord
                     }
+                    ord.hide = true
                     return ord
                 })
                 return false
