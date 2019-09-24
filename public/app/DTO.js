@@ -27,6 +27,8 @@ const newOrderDTO = function(data) {
         order: data.unit || data.order || data.id,
         payed: data.payed || 0,
         ready: data.ready || 0,
+        die: data.die || false,
+        readyTime: data.readyTime || 0,
         flag: data.flag || "",
         checkNum: data.checkNum || "",
         checkSum: data.checkSum || "",

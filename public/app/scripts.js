@@ -120,6 +120,10 @@ var app = new Vue({
         },
         thistime: function(order){
             let time = Math.round(new Date().getTime()/1000) - Number(order.checkTime)
+            let timeDie = Math.round(new Date().getTime()/1000) - Number(order.readyTime)
+            if(timeDie > 1800 && order.checkType == 4 || order.checkType == 5){
+                order.die = true
+            }
             let timemin = Number((time/60).toString().split(/\./)[0])
             let timesec = time - (timemin*60)
             if(timemin < 10){
@@ -139,6 +143,9 @@ var app = new Vue({
             }
             if(order.payed && order.ready && (order.checkType == 1 || order.checkType == 2)){
                 return this.classes.restoran.ready
+            }
+            if(order.ready && order.die == true){
+                return this.classes.all.die
             }
             if(order.payed && !order.ready && (order.checkType == 4 || order.checkType == 5)){
                 return this.classes.app.payed
@@ -254,11 +261,12 @@ var app = new Vue({
                 this.orders.splice(toDelete, 1)
             }
         },
-        readyOrder: function(orderId){
+        readyOrder: function(orderId, readyTime){
 
             this.orders.map(order => {
                 if(order.order == orderId){
                     order.ready = 1
+                    order.readyTime = readyTime
                 }
                 return order
             })
@@ -287,11 +295,12 @@ var app = new Vue({
             }
             if(!order.ready){
                 if(order.checkType == 4 || order.checkType == 5){
+                    order.redyTime = Math.round(new Date().getTime()/1000)
                     deliveryChangeStatus({order_id: order.order, status: "cooked"})
 
                 }
                 sendToReady(order)
-                this.readyOrder(order.order)
+                this.readyOrder(order.order, order.redyTime)
 
 
             }

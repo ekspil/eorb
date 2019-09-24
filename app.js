@@ -223,7 +223,10 @@ io.on('connection', function(socket){
 
 
 
+
+
       if(jsonCheck[msg.id]){
+        jsonCheck[msg.id].readyTime = msg.readyTime;
         jsonCheck[msg.id].ready =1;
       if(!msg.checkType){
         msg.checkType = jsonCheck[msg.id].checkType;
