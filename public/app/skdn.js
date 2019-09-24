@@ -4,16 +4,29 @@ const skdn = function(positions){
     //СКДН по названиям (a, СТРОКА ПОИСКА, ПОЗИЦИЯ ПО АЛФАВИТУ)
     function listCheck(a){
 
-        a = check(a, "0.", 1)
-        a = check(a, "0мл", 1)
-        a = check(a, "5мл", 1)
-        a = check(a, "соус", 2)
-        a = check(a, "фри", 2)
-        a = check(a, "картоф", 2)
-        a = check(a, "ургер", "б")
-        a = check(a, "морож", "я")
-        a = check(a, "мафин", "б")
-        a = check(a, "кейк", "б")
+        a = check(a, "картоф", "е")
+        a = check(a, "наггетс", "е")
+        a = check(a, "пельмен", "е")
+        a = check(a, "баскет", "е")
+        a = check(a, "крыл", "е")
+        a = check(a, "кольца", "е")
+        a = check(a, "ролл", "д")
+        a = check(a, "бургер", "д")
+        a = check(a, "спайси", "д")
+        a = check(a, "Мистер ", "д")
+        a = check(a, "донна", "д")
+        a = check(a, "граф", "д")
+        a = check(a, "мадам", "д")
+        a = check(a, "пицца", "д")
+        a = check(a, "чизкейк", "ж")
+        a = check(a, "маффин", "ж")
+        a = check(a, "пирожок", "ж")
+        a = check(a, "любимый", "б")
+        a = check(a, "бутылк", "б")
+        a = check(a, "lipton", "б")
+        a = check(a, "Minerale", "б")
+        a = check(a, "Балтика", "б")
+        a = check(a, "Соус", "г")
         return a
     }
     //СКДН по РОДИТЕЛЮ (a, СТРОКА ПОИСКА, ПОЗИЦИЯ ПО АЛФАВИТУ) - в приоритете
@@ -40,8 +53,9 @@ const skdn = function(positions){
                 a.parent = skdnnum
             }
         }
-        else if(a && a.parent){
-            a.parent = a.parent +"Z"
+        else if(a && a.parent && a.parent.length > 1){
+            a.parent = a.parent
+            console.log(a.parent)
             const string =  String(a.parent).toUpperCase()
             str = str.toUpperCase()
             if (~string.indexOf(str)) {
