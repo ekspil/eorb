@@ -16,14 +16,46 @@ const skdn = function(positions){
         a = check(a, "кейк", "б")
         return a
     }
+    //СКДН по РОДИТЕЛЮ (a, СТРОКА ПОИСКА, ПОЗИЦИЯ ПО АЛФАВИТУ) - в приоритете
+    function listCheckParent(a){
+
+        a = checkParent(a, "Большие порции", "е")
+        a = checkParent(a, "Пиво", "в")
+        a = checkParent(a, "2. Картофель и наггетсы", "е")
+        a = checkParent(a, "3. Соусы", "г")
+        a = checkParent(a, "4. Горячие напитки", "а")
+        a = checkParent(a, "5. Холодные напитки", "б")
+        a = checkParent(a, "7. Дессерты", "ж")
+        a = checkParent(a, "6. Салаты", "б")
+        a = checkParent(a, "1. Сэндвичи", "д")
+        return a
+    }
 
     function check(a, str, skdnnum){
-        const string =  a.name.toUpperCase()
-        str = str.toUpperCase()
-        if(a && !a.parent){
 
+        if(a && !a.parent){
+            const string =  a.name.toUpperCase()
+            str = str.toUpperCase()
             if (~string.indexOf(str)) {
                 a.parent = skdnnum
+            }
+        }
+        else if(a && a.parent){
+            const string =  a.parent.toUpperCase()
+            str = str.toUpperCase()
+            if (~string.indexOf(str)) {
+                a.parent = skdnnum + a.parent
+            }
+        }
+        return a
+    }
+    function checkParent(a, str, skdnnum){
+
+        if(a && a.parent){
+            const string =  a.parent.toUpperCase()
+            str = str.toUpperCase()
+            if (~string.indexOf(str)) {
+                a.parent = skdnnum + a.parent
             }
         }
         return a
@@ -32,6 +64,8 @@ const skdn = function(positions){
     function compare(a, b) {
         a = listCheck(a)
         b = listCheck(b)
+        a = listCheckParent(a)
+        b = listCheckParent(b)
         let compA = a.parent + a.name
         let compB = b.parent + b.name
         if (compA > compB) return 1; // если первое значение больше второго

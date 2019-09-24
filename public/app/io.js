@@ -17,7 +17,6 @@ socket.emit('hello', 'guests', (data) => {
 
 //Новая позиция
 socket.on('test', function (userData) {
-    console.log(userData)
    let newPos = newPosDTO(userData)
    app.newPosition(newPos)
 
@@ -26,7 +25,6 @@ socket.on('test', function (userData) {
 //Удаление позиции
 
 socket.on('delete', function (userData) {
-    console.log(userData)
     let deletedPos = newPosDTO(userData)
     app.deletePos(deletedPos)
 });
