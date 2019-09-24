@@ -41,7 +41,8 @@ const skdn = function(positions){
             }
         }
         else if(a && a.parent){
-            const string =  a.parent.toUpperCase()
+            a.parent = a.parent +"Z"
+            const string =  String(a.parent).toUpperCase()
             str = str.toUpperCase()
             if (~string.indexOf(str)) {
                 a.parent = skdnnum + a.parent

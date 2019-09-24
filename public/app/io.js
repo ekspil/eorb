@@ -86,7 +86,6 @@ function sendToDie(order){
 }
 
 function deliveryChangeStatus(msg){
-    console.log("io")
     socket.emit('deliveryStatus', msg, (data) => {
         console.log("Статус заказа "+msg.order_id+" сменен: "+ data);
     });
