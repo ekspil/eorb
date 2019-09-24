@@ -32,11 +32,11 @@
                 <div v-for="position in order.positions" v-if="station == position.station || station == 0">
 
                 <div v-if="position.count != 0" class="normal-text">
-                    <div>{{position.count}} x {{position.name}}</div>
+                    <div>{{position.count}} x {{onlyName(position.name)}}</div>
                     <div class="mods" v-for="mod in position.mods">{{mod}}</div>
                 </div>
                 <div v-if="position.count == 0" class="deleted-text">
-                    <div>{{position.count}} x {{position.name}}</div>
+                    <div>{{position.count}} x {{onlyName(position.name)}}</div>
                     <div class="mods" v-for="mod in position.mods">{{mod}}</div>
                 </div>
 

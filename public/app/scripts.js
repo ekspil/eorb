@@ -77,8 +77,9 @@ var app = new Vue({
     computed: {
         ordersList: function(){
 
-            let orders = this.orders.map(order =>{
+            let orders = this.orders.map(ord =>{
                 let newPos = []
+                let order = JSON.parse(JSON.stringify(ord));
                 order.positions = order.positions.map(pos =>{
                     let [poses] = newPos.filter(npos => npos && npos.name == pos.name)
                     if(!poses){
@@ -89,7 +90,7 @@ var app = new Vue({
                             if(npos.name != pos.name){
                                 return npos
                             }
-                            npos.count++
+                            npos.count = npos.count + pos.count
                             return npos
                         })
                     }
@@ -107,6 +108,10 @@ var app = new Vue({
         }
     },
     methods: {
+        onlyName: function(name){
+            name = name.split("@")
+            return name[0]
+        },
         checkStation: function(order){
             let [any] = order.positions.filter(pos => pos.station == station)
             if(!any && station != 0) return false
@@ -181,14 +186,20 @@ var app = new Vue({
         deletePos: function(data){
                 let toDelete = -1
                 this.orders = this.orders.map((order, index) => {
-
+                    let toDeletePos = -1
                     order.positions = order.positions.map(pos => {
-                        if(pos.id != data.id) return pos
 
+                        if(pos.id != data.id) return pos
                         pos.count = Number(pos.count) - Number(data.count)
 
-
                         return pos
+                    })
+                    order.positions = order.positions.filter(pos => {
+                        let nameLength = pos.name.split("@").length
+                        if(nameLength > 1 && pos.count == 0){
+                            return false
+                        }
+                        return true
                     })
                     const posCountInOrder = order.positions.reduce((sum, pos)=>{
                         return sum + pos.count
