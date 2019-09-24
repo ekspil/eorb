@@ -1,33 +1,69 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="mobile-web-app-capable" content="yes">
-    <title> Электронная очередь РБ 2.0.2 mini - кухонный монитор</title>
-    <link href="uikit.css" rel="stylesheet" type="text/css">
-    <link href="css/style.css" rel="stylesheet" type="text/css">
-    <link href="animate.css" rel="stylesheet" type="text/css">
+    <meta http-equiv="Access-Control-Allow-Origin" content="*">
+    <title>РБ ЭО 3</title>
+    <link rel="stylesheet" href="app/distr/css/uikit.min.css" />
+    <link rel="stylesheet" href="app/style/css.css" />
+    <script src="app/distr/vue/vue.js"></script>
+    <script src="app/distr/js/axios.min.js"></script>
+
 </head>
 <body>
 
+<div id="app">
+<div class="uk-child-width-1-5 uk-height-1-1 uk-grid-collapse" uk-grid>
 
-<div id="main">
-<div class="uk-grid" id="sborka">
+    <div v-for="order in ordersList" class="uk-height-1-2 block" v-if="checkStation(order) && flag === order.flag || flag == 'ADMIN' || flag == 'admin'" @click="nextStatus(order)" @dblclick="alertDelete(order)">
+        <div class="js-wrapper uk-height-1-1">
 
+            <div class="uk-height-10 block-header" uk-grid>
+                <div class="uk-width-1-5 nomp uk-text-center">{{order.order}}</div>
+                <div class="uk-width-3-5 nomp uk-text-center">{{type(order.checkType)}}</div>
+                <div class="uk-width-1-5 nomp uk-text-center">{{thistime(order)}}</div>
+            </div>
+
+
+            <div :class="thisorderclass(order)" uk-overflow-auto="selContainer: .uk-height-medium; selContent: .js-wrapper">
+                <div v-for="position in order.positions" v-if="station == position.station || station == 0">
+
+                <div v-if="position.count != 0" class="normal-text">
+                    <div>{{position.count}} x {{onlyName(position.name)}}</div>
+                    <div class="mods" v-for="mod in position.mods">{{mod}}</div>
+                </div>
+                <div v-if="position.count == 0" class="deleted-text">
+                    <div>{{position.count}} x {{onlyName(position.name)}}</div>
+                    <div class="mods" v-for="mod in position.mods">{{mod}}</div>
+                </div>
+
+                    </div>
+                <div  class="uk-position-bottom-center uk-text-center" v-if="order.code && order.ready">Пинкод: {{order.code}}</div>
+            </div>
+
+
+
+
+        </div>
+    </div>
 
 </div>
 </div>
 
-
-
-
-    <script src="/socket.io.js"></script>
-    <script src="/jquery.js"></script>
-    <script src="/uikit.js"></script>
-    <script src="/confIo.js"></script>
-    <script src="/mainSmallSbor.js"></script>
+<script src="app/skdn.js"></script>
+<script src="app/query.js"></script>
+<script src="/socket.io.js"></script>
+<script src="/jquery.js"></script>
+<script src="app/distr/js/uikit.js"></script>
+<script src="/confIo.js"></script>
+<script src="app/commonVars.js"></script>
+<script src="app/scripts.js"></script>
+<script src="app/DTO.js"></script>
+<script src="app/io.js"></script>
+<script src="app/services.js"></script>
 
 </body>
 </html>
