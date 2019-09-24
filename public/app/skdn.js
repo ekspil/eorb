@@ -39,8 +39,22 @@ const skdn = function(positions){
         a = checkParent(a, "4. Горячие напитки", "а")
         a = checkParent(a, "5. Холодные напитки", "б")
         a = checkParent(a, "7. Дессерты", "ж")
-        a = checkParent(a, "6. Салаты", "б")
+        a = checkParent(a, "6. Салаты", "д")
         a = checkParent(a, "1. Сэндвичи", "д")
+
+
+        a = checkParent(a, "соусы", "г")
+        a = checkParent(a, "закуски", "е")
+        a = checkParent(a, "холодные", "б")
+        a = checkParent(a, "горячие", "а")
+        a = checkParent(a, "сэндвичи", "д")
+        a = checkParent(a, "роллы", "д")
+        a = checkParent(a, "десерты", "ж")
+        a = checkParent(a, "пицца", "д")
+        a = checkParent(a, "топпинги", "з")
+        a = checkParent(a, "сиропы", "з")
+        a = checkParent(a, "салаты", "д")
+        a = checkParent(a, "пиво", "б")
         return a
     }
 
