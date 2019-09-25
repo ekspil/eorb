@@ -194,8 +194,8 @@ io.on('connection', function(socket){
      });
 
     socket.on('deleteOrder_allVersion', function(msg){
+        if(jsonCheck[msg.id]) delete jsonCheck[msg.id];
 
-        delete jsonCheck[msg.id];
         for(let key in jsonPosition){
             if(jsonPosition[key].unit == msg.id){
                 socket.broadcast.emit('delete', jsonPosition[key]);
