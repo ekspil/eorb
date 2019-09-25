@@ -69,7 +69,6 @@ const skdn = function(positions){
         }
         else if(a && a.parent && a.parent.length > 1){
             a.parent = a.parent
-            console.log(a.parent)
             const string =  String(a.parent).toUpperCase()
             str = str.toUpperCase()
             if (~string.indexOf(str)) {
