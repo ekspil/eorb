@@ -89,8 +89,11 @@ if(req.query.guestName){
     jsonCheck[req.query.id].guestName = ""
 }
 
+    let date = new Date()
+    let dateTime = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+    var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+    console.log("\n \r "+dateTime + " - newCheck: "+ req.query.id + ", ip: "+ ip)
 
-console.log(req.query)
 jsonCheck[req.query.id].flag = req.query.flag;
 ioc.emit('checkAdd_s', req.query, (data) => {
 //  console.log(data); // data will be 'woot'
@@ -105,6 +108,10 @@ app.get('/delCheck', function(req,res){
 
 // Необходимо следущее
 //id
+    let date = new Date()
+    let dateTime = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+    var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+    console.log("\n \r "+dateTime + " - delCheck: "+ req.query.id + ", ip: "+ ip)
 ioc.emit('checkDel_s', req.query, (data) => {
 //  console.log(data); // data will be 'woot'
 });
