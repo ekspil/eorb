@@ -65,6 +65,10 @@ body {
     background-color: black;
     color: white;
 }
+.all-alarm {
+    background-color: #930a20;
+    color: white;
+}
 .kassa-process {
     background-color: #febfd0;
     color: black;
