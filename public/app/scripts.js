@@ -122,10 +122,10 @@ var app = new Vue({
         thistime: function(order){
             let time = Math.round(new Date().getTime()/1000) - Number(order.checkTime)
             let timeDie = Math.round(new Date().getTime()/1000) - Number(order.readyTime)
-            if(timeDie > 120 && timeDie < 140 && !order.die && (order.checkType == 4 || order.checkType == 5)){
+            if(timeDie > 900 && timeDie < 1800 && !order.die && (order.checkType == 4 || order.checkType == 5)){
                 order.alarm = true
             }
-            if(timeDie >= 140 && (order.checkType == 4 || order.checkType == 5)){
+            if(timeDie >= 1800 && (order.checkType == 4 || order.checkType == 5)){
                 order.die = true
             }
             let timemin = Number((time/60).toString().split(/\./)[0])
@@ -307,7 +307,7 @@ var app = new Vue({
 
                 }
                 sendToReady(order)
-                this.readyOrder(order.order, order.redyTime)
+                this.readyOrder(order.order, order.readyTime)
 
 
             }
@@ -361,6 +361,7 @@ var app = new Vue({
                     order.checkSum = newInfo.checkSum
                     order.checkType = newInfo.checkType
                     order.checkTime = newInfo.checkTime || 1569038891
+                    order.readyTime = newInfo.readyTime
 
                     return order
 
