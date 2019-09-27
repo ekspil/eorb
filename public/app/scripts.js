@@ -10,6 +10,7 @@ var app = new Vue({
             all: {
                 start: "uk-height-90 uk-inline all-start",
                 die: "uk-height-90 uk-inline all-die",
+                alarm: "uk-height-90 uk-inline all-alarm",
             },
             delivery: {
                 start: "uk-height-90 uk-inline all-start",
@@ -121,7 +122,10 @@ var app = new Vue({
         thistime: function(order){
             let time = Math.round(new Date().getTime()/1000) - Number(order.checkTime)
             let timeDie = Math.round(new Date().getTime()/1000) - Number(order.readyTime)
-            if(timeDie > 1800 && order.checkType == 4 || order.checkType == 5){
+            if(timeDie > 120 && timeDie < 140 && !order.die && (order.checkType == 4 || order.checkType == 5)){
+                order.alarm = true
+            }
+            if(timeDie >= 140 && (order.checkType == 4 || order.checkType == 5)){
                 order.die = true
             }
             let timemin = Number((time/60).toString().split(/\./)[0])
@@ -144,7 +148,10 @@ var app = new Vue({
             if(order.payed && order.ready && (order.checkType == 1 || order.checkType == 2)){
                 return this.classes.restoran.ready
             }
-            if(order.ready && order.die == true){
+            if(order.ready && order.alarm && !order.die){
+                return this.classes.all.alarm
+            }
+            if(order.ready && order.die){
                 return this.classes.all.die
             }
             if(order.payed && !order.ready && (order.checkType == 4 || order.checkType == 5)){
@@ -295,7 +302,7 @@ var app = new Vue({
             }
             if(!order.ready){
                 if(order.checkType == 4 || order.checkType == 5){
-                    order.redyTime = Math.round(new Date().getTime()/1000)
+                    order.readyTime = Math.round(new Date().getTime()/1000)
                     deliveryChangeStatus({order_id: order.order, status: "cooked"})
 
                 }

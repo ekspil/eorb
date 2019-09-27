@@ -54,6 +54,7 @@ socket.on('checkToReady', function (msg) {
 
 //Отправка данных
 function sendToReady(order){
+
     let msg = {
         id: order.order,
         name: order.order,
