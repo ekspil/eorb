@@ -65,6 +65,7 @@ function sendToReady(order){
         checkNum: order.checkNum,
         checkTime: order.checkTime,
         readyTime: order.readyTime,
+        checkType: order.checkType
     }
     socket.emit('checkToReady_s', msg, (data) => {
         //console.log(data);

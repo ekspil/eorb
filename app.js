@@ -216,7 +216,7 @@ io.on('connection', function(socket){
     });
 
     socket.on('checkToReady_s', function(msg){
-        if(msg.checkTime){
+        if(msg.checkTime && msg.checkType != '3'){
             let date = new Date()
             let time = Math.round(date.getTime()/1000);
             msg.timerValue = Number(time) - Number(msg.checkTime)
