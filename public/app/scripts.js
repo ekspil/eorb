@@ -297,9 +297,9 @@ var app = new Vue({
                 if(order.checkType == 4 || order.checkType == 5){
                     deliveryChangeStatus({order_id: order.order, status: "done"})
                 }
-
-                this.deleteOrder(order.order)
                 sendToDie(order)
+                this.deleteOrder(order.order)
+
             }
             if(!order.ready){
                 if(order.checkType == 4 || order.checkType == 5){
@@ -316,8 +316,9 @@ var app = new Vue({
         },
         alertDelete: function(order){
             if(!order.payed){
-                this.deleteOrder(order.order)
                 sendToDie(order)
+                this.deleteOrder(order.order)
+
             }
         },
         parseData: function(data){
