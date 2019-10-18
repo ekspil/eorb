@@ -47,9 +47,12 @@ let flag =  getUrlVars()["flag"] || "";
 
 setInterval(function(){
 console.log("reload");
-window.location.reload();
+startHranitel(window, document);
+setTimeout(()=>{
+    window.location.reload()
+}, 15000)
 
-}, 21600000);
+}, 1800000);
 
 //
 //  Ефремов А.В.  Запрос - приветствие, запрос текущих чеков и отображение
