@@ -316,8 +316,31 @@ var app = new Vue({
         },
         alertDelete: function(order){
             if(!order.payed){
-                sendToDie(order)
-                this.deleteOrder(order.order)
+                console.log(order.pushTimes)
+                if(!order.pushTimes){
+                    this.orders = this.orders.map((ord)=>{
+                        if(ord.order != order.order){
+                            return ord
+                        }
+                        ord.pushTimes = 1
+                        return ord
+                    })
+                }
+                if(order.pushTimes){
+                    this.orders = this.orders.map((ord)=>{
+                    if(ord.order != order.order){
+                        return ord
+                    }
+                    ord.pushTimes++
+                    return ord
+                })
+                }
+                if(order.pushTimes > 5){
+                    sendToDie(order)
+                    this.deleteOrder(order.order)
+                }
+
+
 
             }
         },
