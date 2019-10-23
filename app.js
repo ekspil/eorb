@@ -10,6 +10,31 @@ var jsonPosition = {};
 var mssql = require('./mssql');
 const services = require('./services');
 
+
+function synch(){
+    let finded = []
+for(let key in jsonCheck){
+       let checking = false
+    for(let item in jsonPosition){
+
+        if(jsonPosition[item].unit == jsonCheck[key].id){
+            checking = true
+        }
+    }
+    if(!checking){
+        finded.push(key)
+    }
+}
+
+finded.map(item => {
+    ioc.emit('deleteOrder_allVersion', {id: item}, (data) => {
+        //  console.log(data); // data will be 'woot'
+    });
+    return item
+})
+}
+
+setInterval(synch, 30000)
 server.listen(conf.port, conf.ip, function(){
     var addr = server.address();
     logger.debug('listening on '+addr.address+':' + addr.port);
