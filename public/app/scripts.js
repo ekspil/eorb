@@ -220,7 +220,10 @@ var app = new Vue({
                     }, 0)
                     if (posCountInOrder == 0){
                         toDelete = index
-                        sendToDie(order)
+                        if(manager == 1){
+                            sendToDie(order)
+                        }
+
                     }
 
 
