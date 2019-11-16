@@ -12,7 +12,7 @@
     "animate.css": "^3.5.2",
     "async": "^2.6.1",
     "express": "^4.15.3",
-    "jquery": "^3.2.1",
+    "jquery": "^3.4.0",
     "log4js": "^1.1.1",
     "mssql": "^4.3.0",
     "node-autodetect-utf8-cp1251-cp866": "^0.1.0",
