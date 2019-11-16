@@ -74,7 +74,7 @@ setTimeout(()=>{
 
 socket.emit('hello', urlArray[1], (data) => {
   console.log(data);
-if(urlArray[1] == "guests"){
+if(urlArray[1] == "guests" || "guests_vert"){
 
   for (var key in data){
       data.sound = "on";
