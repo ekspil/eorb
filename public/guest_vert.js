@@ -456,14 +456,14 @@ if (!manager){
 
     <div class="uk-width-2-10 " >  <!--   "uk-width-1-5 uk-hidden-small uk-hidden-mini"      -->
         <div class="uk-panel uk-panel-space"><div class="uk-panel-teaser notready-img">
-    <img onclick="playSound()" class ="uk-align-center" src="/data/notready.png" alt="">
+    <img onclick="playSound()" class ="uk-align-center" src="/data/notready_vert.png" alt="">
     </div></div><br>
 <div class="uk-grid uk-flex uk-flex-wrap" id="notready-list"></div>
 
         </div>
     <div class="uk-width-2-10 " >
       <div class="uk-panel uk-panel-space "><div class="uk-panel-teaser ready-img " id="panelTeaser">
-    <img class ="uk-align-center " src="/data/ready.png" alt="">
+    <img class ="uk-align-center " src="/data/ready_vert.png" alt="">
     </div></div><br>
 <div class="uk-grid" id="ready-list"></div>
     </div>
