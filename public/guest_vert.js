@@ -469,6 +469,8 @@ if (!manager){
     </div>
     <div class="uk-width-4-10 uk-cover-container"  id="bg-img">
     <br><br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br><br>
     <video autoplay loop muted playsinline uk-cover>
         <source src="/video/1234.mp4" type="video/mp4" autostart="true">
 
