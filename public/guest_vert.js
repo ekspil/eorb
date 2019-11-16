@@ -72,7 +72,7 @@ setTimeout(()=>{
 
 
 
-socket.emit('hello', urlArray[1], (data) => {
+socket.emit('hello', "guests", (data) => {
   console.log(data);
 if(urlArray[1] == "guests" || "guests_vert"){
 
@@ -242,7 +242,7 @@ if(!userData.name){
 
   }
   else {
-    $('#notready-list').append('<a href="javascript://" onclick="alert(massageAlert);" class="uk-panel uk-width-1-1   uk-panel-box-hidden-left   uk-margin-top-remove animated flipInX"  id='+userData.id+'><div class="uk-text-center"><b>'+userData.id+'</b></div><div class="uk-text-center"><h1>'+(userData.guestName || "  ")+'</h1></div></a>');
+    $('#notready-list').append('<a href="javascript://" onclick="alert(massageAlert);" class="uk-panel uk-width-1-1   uk-panel-box-hidden-left-v   uk-margin-top-remove animated flipInX"  id='+userData.id+'><div class="uk-text-center"><b>'+userData.id+'</b></div><div class="uk-text-center"><h1>'+(userData.guestName || "  ")+'</h1></div></a>');
 }
 }
 //В готовые!

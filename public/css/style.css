@@ -224,6 +224,16 @@ background-position: center;
     padding: 15px;
 }
 
+.uk-panel-box-hidden-left-v{
+    height: 100px;
+    width: 98%;
+    margin-bottom: 1%;
+    margin-right: 0%;
+    margin-left: 3%;
+    background: #bffefb;
+    color: #2d7091;
+    padding: 15px;
+}
 .uk-panel-box-sborka {
 
     background: #fffceb;
