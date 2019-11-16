@@ -75,6 +75,9 @@ app.get('/kitchen', function(req,res){
 app.get('/guests', function(req,res){
     res.sendFile(__dirname+'/public/guest.html');
 });
+app.get('/guests_vert', function(req,res){
+    res.sendFile(__dirname+'/public/guest_vert.html');
+});
 app.get('/favicon.ico', function(req,res){
     res.sendFile(__dirname+'/public/data/favicon.ico');
 });
