@@ -242,7 +242,7 @@ if(!userData.name){
 
   }
   else {
-    $('#notready-list').append('<a href="javascript://" onclick="alert(massageAlert);" class="uk-panel uk-width-1-1   uk-panel-box-hidden-left-v   uk-margin-top-remove animated flipInX"  id='+userData.id+'><div class="uk-text-center"><b>'+userData.id+'</b></div><div class="uk-text-center"><h1>'+(userData.guestName || "  ")+'</h1></div></a>');
+    $('#notready-list').append('<a href="javascript://" onclick="alert(massageAlert);" class="uk-panel uk-width-1-2   uk-panel-box-hidden-left   uk-margin-top-remove animated flipInX"  id='+userData.id+'><div class="uk-text-center"><b>'+userData.id+'</b></div><div class="uk-text-center"><h1>'+(userData.guestName || "  ")+'</h1></div></a>');
 }
 }
 //В готовые!
@@ -454,31 +454,23 @@ if (!manager){
   $('#client-box').append(`
 
 
-    <div class="uk-width-3-10 " >  <!--   "uk-width-1-5 uk-hidden-small uk-hidden-mini"      -->
+    <div class="uk-width-6-10" >  <!--   "uk-width-1-5 uk-hidden-small uk-hidden-mini"      -->
         <div class="uk-panel uk-panel-space"><div class="uk-panel-teaser notready-img">
-    <img onclick="playSound()" class ="uk-align-center" src="/data/notready_vert.png" alt="">
+        <br><br>
+        <img onclick="playSound()" class ="uk-align-center" src="/data/notready_ve.png" alt="" >
     </div></div><br>
-<div class="uk-grid uk-flex uk-flex-wrap" id="notready-list"></div>
+    <div class="uk-grid uk-flex uk-flex-wrap" id="notready-list"></div>
 
         </div>
-    <div class="uk-width-3-10 " >
+    <div class="uk-width-4-10" >
       <div class="uk-panel uk-panel-space "><div class="uk-panel-teaser ready-img " id="panelTeaser">
-    <img class ="uk-align-center " src="/data/ready_vert.png" alt="">
+      <br><br>
+    <img class ="uk-align-center " src="/data/ready_ve.png" alt="">
     </div></div><br>
 <div class="uk-grid" id="ready-list"></div>
     </div>
-    <div class="uk-width-4-10 uk-cover-container"  id="bg-img">
-    <br><br><br><br><br><br><br><br><br><br><br>
-    <br><br><br><br><br><br><br><br><br><br><br>
-    <br><br><br><br><br><br><br><br><br><br><br>
-    <video autoplay loop muted playsinline uk-cover>
-        <source src="/video/1234.mp4" type="video/mp4" autostart="true">
-
-    </video>
-
-
-    </div>
-    </div>
+   
+   
 
 
     `);

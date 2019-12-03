@@ -168,14 +168,24 @@ a.uk-padding-vertical-remove {
   width: 100%;
 
 }
-
+.slider {
+    height: 700px;
+    background-size: cover;
+}
 .bg-overflow {
 background-image: url(../data/double-down.png);
 background-repeat: no-repeat;
 background-position: center;
 
 }
-
+.vertical-class-l {
+    position: absolute;
+    top: 750px;
+}
+.vertical-class-r {
+    position: absolute;
+    top: 750px;
+}
 .appCode{
     position: relative;
     top: 93%;
@@ -226,7 +236,7 @@ background-position: center;
 
 .uk-panel-box-hidden-left-v{
     height: 100px;
-    width: 96%;
+    width: 48%;
     margin-bottom: 1%;
     margin-right: 0%;
     margin-left: 3%;

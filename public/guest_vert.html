@@ -10,12 +10,25 @@
     <link href="uikit.css" rel="stylesheet" type="text/css">
     <link href="css/style.css" rel="stylesheet" type="text/css">
     <link href="animate.css" rel="stylesheet" type="text/css">
-</head>
+    <script src="/jquery.js"></script>
+    <script src="/uikit.js"></script>
+
+
 <body>
 
     <div class="wrapper" id="main">
-        <div  id="chat-box">
+        <div  id="chat-box-v">
             <div class="uk-grid uk-margin-remove " id="client-box">
+                <div class="uk-width-1-1 slider">
+                    <!--<video autoplay loop muted playsinline uk-cover>-->
+                    <!--<source src="/video/1234.mp4" type="video/mp4" autostart="true">-->
+
+                    <!--</video>-->
+                    <!--<img class ="uk-align-center " src="/video/1234.jpg" alt="" >-->
+
+
+                </div>
+
 
 
             </div>
@@ -23,10 +36,36 @@
 </div>
 
     <script src="/socket.io.js"></script>
-    <script src="/jquery.js"></script>
-    <script src="/uikit.js"></script>
     <script src="/confIo.js"></script>
     <script src="/guest_vert.js"></script>
+
+    <script>
+
+
+        function start(w, d) {
+            w.onload = function () {
+                var wp = d.querySelector('.slider'),
+                    colors = ['url(/video/1.jpg)', 'url(/video/2.jpg)', 'url(/video/3.jpg)' ],
+                    ln = colors.length;
+
+                var changeColor = function (i) {
+                    if (i < ln) {
+                        setTimeout(function () {
+                            wp.style.cssText = "background-image: " + colors[i] +"; height: " + innerHeight*0.37 +"px;";
+                            i++;
+                            changeColor(i);
+                        }, 10000);
+                    } else {
+                        changeColor(0);
+                    }
+                };
+
+                changeColor(0);
+            };
+        };
+        start(window, document);
+
+    </script>
 
 </body>
 </html>
