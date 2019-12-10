@@ -111,12 +111,13 @@ else if(urlArray[1] == "kitchen"){
 //  Ефремов А.В.   Функция добавления в ЭО целых чеков
 //
 socket.on('checkAdd', function(userData){
+    console.log("Добавили чек | "  + userData.id)
     if(!userData.flag){
         userData.flag = '';
     }
     if(flag == userData.flag || flag == "ADMIN"){
         userData.sound = "on"
-    console.log('Добавлена позиция | ' + userData.Name);
+    console.log('Добавлена позиция | ' + userData.id);
     addCheckToNotReady(userData);
 
     messagesBox.scrollTop(messagesBox.prop('scrollHeight'));
@@ -126,6 +127,7 @@ socket.on('checkAdd', function(userData){
 //  Ефремов А.В.   Функция перевода чеков в разряд готовых
 //
 socket.on('checkToReady', function(msgf){
+    console.log("Чек в готовые | "  + msgf.id)
     if(!msgf.flag){
         msgf.flag = '';
     }
@@ -141,7 +143,7 @@ socket.on('checkToReady', function(msgf){
 }});
 
 socket.on('checkEnd', function(userData){
-    console.log('checkEnd ' + userData.id);
+    console.log("Чек завершен | "  + userData.id)
 
     removeAllFromReady(userData);
 
@@ -150,7 +152,7 @@ socket.on('checkEnd', function(userData){
 
 //Удаление чека отовсюду
 socket.on('checkDel', function(msg){
-    console.log('checkDel ' + msg.id);
+    console.log("Чек аварийно удален | "  + msg.id)
     removeAll(msg);
 
     //messagesBox.scrollTop(messagesBox.prop('scrollHeight'));
@@ -466,11 +468,11 @@ if (!manager){
 <div class="uk-grid" id="ready-list"></div>
     </div>
     <div class="uk-width-4-10 uk-cover-container"  id="bg-img">
+    <img class="uk-align-center " src="/video/123456.jpg" alt="">
+    <!--<video autoplay loop muted playsinline uk-cover>-->
+        <!--<source src="/video/1234.mp4" type="video/mp4" autostart="true">-->
 
-    <video autoplay loop muted playsinline uk-cover>
-        <source src="/video/1234.mp4" type="video/mp4" autostart="true">
-
-    </video>
+    <!--</video>-->
 
 
     </div>
