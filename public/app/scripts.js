@@ -193,9 +193,7 @@ var app = new Vue({
         },
         newPosition: function(data){
             let pc = this.pizzulaCheck(data, 1, station)
-            console.log(pc)
             if (pc) { return false}
-            console.log(pc)
             let [thisorder] = this.orders.filter(order => order && order.order == data.order)
             if(thisorder){
                 this.orders = this.orders.map(order => {
