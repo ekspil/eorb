@@ -15,8 +15,8 @@
 </head>
 <body>
 
-<div id="app">
-<div class="uk-child-width-1-5 uk-height-1-1 uk-grid-collapse" uk-grid>
+<div id="app" uk-grid>
+<div :class="mainClass" uk-grid>
 
     <div v-for="order in ordersList" class="uk-height-1-2 block" v-if="checkStation(order) && (flag === order.flag || flag == 'ADMIN' || flag == 'admin')" @click="nextStatus(order)" @dblclick="alertDelete(order)">
         <div class="js-wrapper uk-height-1-1">
@@ -51,6 +51,29 @@
     </div>
 
 </div>
+    <div class="uk-child-width-1-1 uk-height-1-1 uk-grid-collapse uk-width-1-6" v-if="station == 4">
+        <div class="block js-wrapper uk-height-1-3 uk-text-center uk-inline">
+            <p><span @click="pizzulaPlus('Кусочек Пепперони', -1)">-</span> Пеперони <span @click="pizzulaPlus('Кусочек Пепперони', +1)">+</span></p>
+            <p><progress  class="uk-progress uk-progress-1" :value="pizzules.pepper.count" max="6"></progress></p>
+            <p class="text-picculya ">{{pizzules.pepper.count}}</p>
+            <p class="uk-position-bottom-center"><button class="uk-button uk-button-primary uk-button-large" @click="pizzulaPlus('Кусочек Пепперони')">Добавить!</button></p>
+        </div>
+        <div class="block js-wrapper uk-height-1-3 uk-text-center uk-inline">
+            <p><span @click="pizzulaPlus('Кусочек Класс', -1)">-</span> Классика <span @click="pizzulaPlus('Кусочек Класс', +1)">+</span></p>
+            <p><progress  class="uk-progress uk-progress-2" :value="pizzules.classic.count" max="6"></progress></p>
+            <p class="text-picculya ">{{pizzules.classic.count}}</p>
+            <p class="uk-position-bottom-center"><button class="uk-button uk-button-primary uk-button-large" @click="pizzulaPlus('Кусочек Класс')" >Добавить!</button></p>
+        </div>
+        <div class="block js-wrapper uk-height-1-3 uk-text-center uk-inline">
+            <p><span @click="pizzulaPlus('Кусочек Сырной', -1)">-</span> Сырная курочка <span @click="pizzulaPlus('Кусочек Сырной', +1)">+</span></p>
+            <p><progress  class="uk-progress uk-progress-3" :value="pizzules.sirkur.count" max="6"></progress></p>
+            <p class="text-picculya ">{{pizzules.sirkur.count}}</p>
+            <p class="uk-position-bottom-center"><button class="uk-button uk-button-primary uk-button-large" @click="pizzulaPlus('Кусочек Сырной')">Добавить!</button></p>
+        </div>
+
+
+    </div>
+
 </div>
 
 <script src="app/skdn.js"></script>

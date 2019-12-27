@@ -14,6 +14,12 @@ socket.emit('hello', 'guests', (data) => {
     app.parseDataStatuses(data);
 });
 
+socket.emit('hello', 'pizzulya', (data) => {
+    console.log("Запрос данных с сервера(hello pizzulya):");
+    console.log(data);
+    app.pizzules = data
+});
+
 
 //Новая позиция
 socket.on('test', function (userData) {
@@ -51,6 +57,12 @@ socket.on('checkToReady', function (msg) {
 
 });
 
+//Обновление пицуль
+socket.on('sendPizzulya', function (msg) {
+    app.pizzules = msg
+
+});
+
 
 //Отправка данных
 function sendToReady(order){
@@ -71,6 +83,8 @@ function sendToReady(order){
         //console.log(data);
     });
 }
+
+
 function sendToDie(order){
     let msg = {
         id: order.order,
@@ -84,6 +98,13 @@ function sendToDie(order){
     }
 
     socket.emit('deleteOrder_allVersion', msg, (data) => {
+        //console.log(data);
+    });
+}
+
+function sendPizzulya(msg){
+
+    socket.emit('newPizzulya', msg, (data) => {
         //console.log(data);
     });
 }

@@ -7,8 +7,63 @@ var io = require('socket.io')(server);
 var ioc = require('socket.io-client')('http://'+conf.ip+':'+conf.port);
 var jsonCheck = {};
 var jsonPosition = {};
+let pizzulya = {
+    pepper: {
+        name: "",
+        count: 0
+    },
+    classic: {
+        name: "",
+        count: 0
+    },
+    sirkur: {
+        name: "",
+        count: 0
+    }
+};
 var mssql = require('./mssql');
 const services = require('./services');
+const sendPizzulya = function(data){
+    ioc.emit('sendPizzulya', data, (answer) => {
+    //console.log(answer);
+});
+}
+
+const pizzulaCheck = function(data, oper){
+
+    if (data.name.indexOf("Кусочек Класс") !== -1){
+        if (oper == 1){
+            pizzulya.classic.count = pizzulya.classic.count - 1
+            sendPizzulya(pizzulya)
+            return true}
+        if (oper == 0){
+            pizzulya.classic.count = pizzulya.classic.count + 1
+            sendPizzulya(pizzulya)
+            return true }
+    }
+    if (data.name.indexOf("Кусочек Сырной") !== -1){
+        if (oper == 1){
+            pizzulya.sirkur.count = pizzulya.sirkur.count - 1
+            sendPizzulya(pizzulya)
+            return true}
+        if (oper == 0){
+            pizzulya.sirkur.count = pizzulya.sirkur.count + 1
+            sendPizzulya(pizzulya)
+            return true }
+    }
+    if (data.name.indexOf("Кусочек Пепперони") !== -1){
+        if (oper == 1){
+            pizzulya.pepper.count = pizzulya.pepper.count - 1
+            sendPizzulya(pizzulya)
+            return true }
+        if (oper == 0){
+            pizzulya.pepper.count = pizzulya.pepper.count + 1
+            sendPizzulya(pizzulya)
+            return true }
+    }
+    return false
+
+}
 
 
 function synch(){
@@ -61,6 +116,12 @@ app.get('/jquery.js', function(req,res){
 app.get('/uikit.js', function(req,res){
     res.sendFile(__dirname+'/node_modules/uikit/dist/js/uikit.min.js');
 });
+app.get('/slideshow-fx.js', function(req,res){
+    res.sendFile(__dirname+'/node_modules/uikit/dist/js/components/slideshow-fx.js');
+});
+app.get('/slideshow.js', function(req,res){
+    res.sendFile(__dirname+'/node_modules/uikit/dist/js/components/slideshow.js');
+});
 
 app.get('/uikit.css', function(req,res){
     res.sendFile(__dirname+'/node_modules/uikit/dist/css/uikit.almost-flat.min.css');
@@ -87,7 +148,7 @@ app.get('/kitchenNew', function(req,res){
 //добавление позиции на кухонный монитор
 //
 //
-app.get('/newCheck', function(req,res){
+app.get('/newCheck', async function(req,res){
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Headers', 'origin, content-type, accept');
 //logger.info(req.query.name+' Get запрос принят ');
@@ -156,6 +217,7 @@ app.get('/new', function(req,res){
 // Необходимо следущее
 //id
 //name
+pizzulaCheck(req.query, 1)
 jsonPosition[req.query.id] = {};
 jsonPosition[req.query.id].name = req.query.name;
 jsonPosition[req.query.id].id = req.query.id;
@@ -173,6 +235,10 @@ res.sendStatus("200");
 app.get('/del', function(req,res){
 // Необходимо следущее:
 //id
+    if(jsonPosition[req.query.id]){
+        pizzulaCheck(jsonPosition[req.query.id], 0)
+    }
+
         ioc.emit('del', req.query, (data) => {
         //  console.log(data); // data will be 'woot'
     });
@@ -188,6 +254,9 @@ io.on('connection', function(socket){
     }
     else if (nameStation == "kitchen" ){
         fn(jsonPosition);
+    }
+    else if (nameStation == "pizzulya" ){
+        fn(pizzulya);
     }
 
     });
@@ -209,6 +278,14 @@ io.on('connection', function(socket){
 
     socket.on('timer', function(timemsg){
         mssql.register(timemsg);
+    })
+
+    socket.on('newPizzulya', function(msg){
+       pizzulya = msg
+    });
+
+    socket.on('sendPizzulya', function(msg){
+        socket.broadcast.emit('sendPizzulya', msg);
     });
 
     socket.on('del', function(msg){

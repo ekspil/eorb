@@ -6,6 +6,20 @@ var app = new Vue({
         station: station,
         manager: manager,
         flag: flag,
+        pizzules: {
+            pepper: {
+                name: "",
+                count: 0
+            },
+            classic: {
+                name: "",
+                count: 0
+            },
+            sirkur: {
+                name: "",
+                count: 0
+            },
+        },
         classes: {
             all: {
                 start: "uk-height-90 uk-inline all-start",
@@ -76,6 +90,15 @@ var app = new Vue({
 
     },
     computed: {
+        mainClass: function(){
+            if (this.station == 4){
+                return "uk-child-width-1-5 uk-height-1-1 uk-grid-collapse uk-width-5-6"
+            }
+            else {
+                return "uk-child-width-1-5 uk-height-1-1 uk-grid-collapse uk-width-1-1"
+            }
+
+        },
         ordersList: function(){
 
             let orders = this.orders.map(ord =>{
@@ -169,6 +192,10 @@ var app = new Vue({
 
         },
         newPosition: function(data){
+            let pc = this.pizzulaCheck(data, 1, station)
+            console.log(pc)
+            if (pc) { return false}
+            console.log(pc)
             let [thisorder] = this.orders.filter(order => order && order.order == data.order)
             if(thisorder){
                 this.orders = this.orders.map(order => {
@@ -195,6 +222,64 @@ var app = new Vue({
                 newOrder.positions.push(data)
                 this.orders.push(newOrder)
             }
+
+        },
+        pizzulaCheck: function(data, oper, st){
+            if (st != 4) { return false}
+            if (data.name.indexOf("Кусочек Класс") !== -1){
+                if (oper == 1){
+                    //this.pizzules.classic.count = this.pizzules.classic.count - 1
+                    //sendPizzulya(this.pizzules)
+                    return true}
+                if (oper == 0){
+                    //this.pizzules.classic.count = this.pizzules.classic.count + 1
+                    //sendPizzulya(this.pizzules)
+                    return true }
+            }
+            if (data.name.indexOf("Кусочек Сырной") !== -1){
+                if (oper == 1){
+                    //this.pizzules.sirkur.count = this.pizzules.sirkur.count - 1
+                    //sendPizzulya(this.pizzules)
+                    return true}
+                if (oper == 0){
+                    //this.pizzules.sirkur.count = this.pizzules.sirkur.count + 1
+                    //sendPizzulya(this.pizzules)
+                    return true }
+            }
+            if (data.name.indexOf("Кусочек Пепперони") !== -1){
+                if (oper == 1){
+                    //this.pizzules.pepper.count = this.pizzules.pepper.count - 1
+                    //sendPizzulya(this.pizzules)
+                    return true }
+                if (oper == 0){
+                    //this.pizzules.pepper.count = this.pizzules.pepper.count + 1
+                    //sendPizzulya(this.pizzules)
+                    return true }
+            }
+            return false
+
+        },
+
+        pizzulaPlus: function(data, num){
+            if(!num){ num = 6}
+            if (data.indexOf("Кусочек Класс") !== -1){
+                    this.pizzules.classic.count = this.pizzules.classic.count + num
+                    sendPizzulya(this.pizzules)
+                    return true
+            }
+            if (data.indexOf("Кусочек Сырной") !== -1){
+                    this.pizzules.sirkur.count = this.pizzules.sirkur.count + num
+                    sendPizzulya(this.pizzules)
+                    return true
+            }
+            if (data.indexOf("Кусочек Пепперони") !== -1){
+
+                    this.pizzules.pepper.count = this.pizzules.pepper.count + num
+                    sendPizzulya(this.pizzules)
+                    return true
+
+            }
+            return false
 
         },
         deletePos: function(data){
@@ -350,6 +435,9 @@ var app = new Vue({
         parseData: function(data){
             let newData = []
             for (let key in data){
+                const sp = this.pizzulaCheck(data[key], 1, station)
+                console.log(sp)
+                if(sp){continue}
                 let [thisorder] = newData.filter(order => order && order.order == data[key].unit)
                 if(!thisorder){
                     let newOrder = newOrderDTO(data[key])
