@@ -467,9 +467,9 @@ if (!manager){
     </div></div><br>
 <div class="uk-grid" id="ready-list"></div>
     </div>
-    <div class="uk-width-4-10 uk-cover-container"  id="bg-img">
-    <img class="uk-align-center " src="/video/123456.jpg" alt="">
-    <!--<video autoplay loop muted playsinline uk-cover>-->
+    <div class="uk-width-4-10 uk-cover-container slider-vert"  id="bg-img">
+    <!--<img class="uk-align-center " src="/video/123456.jpg" alt="">-->
+    <!--<video autoplay loop muted playsinline uk-cover>
         <!--<source src="/video/1234.mp4" type="video/mp4" autostart="true">-->
 
     <!--</video>-->
