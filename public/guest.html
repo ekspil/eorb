@@ -40,7 +40,7 @@
                 var changeColor = function (i) {
                     if (i < ln) {
                         setTimeout(function () {
-                            wp.style.cssText = "background-image: " + colors[i] +"; height: " + innerHeight*0.37 +"px;";
+                            wp.style.cssText = "background-image: " + colors[i] +";";
                             i++;
                             changeColor(i);
                         }, 10000);
