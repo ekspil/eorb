@@ -28,5 +28,33 @@
     <script src="/confIo.js"></script>
     <script src="/guest.js"></script>
 
+    <script>
+
+
+        function start(w, d) {
+            w.onload = function () {
+                var wp = d.querySelector('#bg-img'),
+                    colors = ['url(/video/1.jpg)', 'url(/video/2.jpg)', 'url(/video/3.jpg)' ],
+                    ln = colors.length;
+
+                var changeColor = function (i) {
+                    if (i < ln) {
+                        setTimeout(function () {
+                            wp.style.cssText = "background-image: " + colors[i] +"; height: " + innerHeight*0.37 +"px;";
+                            i++;
+                            changeColor(i);
+                        }, 10000);
+                    } else {
+                        changeColor(0);
+                    }
+                };
+
+                changeColor(0);
+            };
+        };
+        start(window, document);
+
+    </script>
+
 </body>
 </html>
