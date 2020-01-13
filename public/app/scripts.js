@@ -191,7 +191,7 @@ var app = new Vue({
             }
 
         },
-        newPosition: function(data){
+        newPosition: async function(data){
             let pc = this.pizzulaCheck(data, 1, station)
             if (pc) { return false}
             let [thisorder] = this.orders.filter(order => order && order.order == data.order)
@@ -280,7 +280,7 @@ var app = new Vue({
             return false
 
         },
-        deletePos: function(data){
+        deletePos: async function(data){
                 let toDelete = -1
                 this.orders = this.orders.map((order, index) => {
                     let toDeletePos = -1
@@ -310,7 +310,7 @@ var app = new Vue({
                 })
 
                 if(toDelete != -1){
-                    this.orders.splice(toDelete, 1)
+                    await this.orders.splice(toDelete, 1)
                 }
 
 
