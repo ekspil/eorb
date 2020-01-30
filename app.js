@@ -348,3 +348,19 @@ io.on('connection', function(socket){
      });
 
 });
+
+// Юрченко 29.01.2019
+const fs = require('fs');
+const path = require('path');
+const folderName = 'video';
+const nodejsPath = './public/'+ folderName;
+const htmlPath = '/'+ folderName + '/';
+//
+app.get('/getimagelist', function(req,res){
+	
+	let dirfiles = fs.readdirSync(nodejsPath).map(fileName => {
+    return ('url('+ '"' + htmlPath + fileName + '"' + ')') });
+	
+	res.json({title:"dirfiles" , message:dirfiles});
+    
+});
