@@ -41,29 +41,40 @@
 
     <script>
 
-
-        function start(w, d) {
+let url="http://localhost:4000/getimagelist";
+        fetch(url).then(response => response.json())
+        .then( (result) => {
+            console.log('success:', result)
+			
+			la = result.message;
+			
+        })
+        .catch(error => console.log('error:', error));
+	
+	function start(w, d) {
             w.onload = function () {
                 var wp = d.querySelector('.slider'),
-                    colors = ['url(/video/1.jpg)', 'url(/video/2.jpg)', 'url(/video/3.jpg)' ],
-                    ln = colors.length;
+                    images = la,
+                    ln = images.length;
+					console.log(la)
 
-                var changeColor = function (i) {
+                var changeImg = function (i) {
                     if (i < ln) {
                         setTimeout(function () {
-                            wp.style.cssText = "background-image: " + colors[i] +"; height: " + innerHeight*0.37 +"px;";
+                            wp.style.cssText = "background-image: " + images[i] +";";
                             i++;
-                            changeColor(i);
-                        }, 10000);
+                            changeImg(i);
+                        }, 59000);
                     } else {
-                        changeColor(0);
+                        changeImg(0);
                     }
                 };
 
-                changeColor(0);
+                changeImg(0);
             };
         };
         start(window, document);
+
 
     </script>
 
