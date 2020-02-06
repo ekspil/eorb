@@ -19,6 +19,20 @@ const exp = {
                 return response.data.success
             })
 
+    },
+    sendInfoToLog: async function(msg) {
+        //accepted, production, cooked, sent, done, canceled(отменен)
+        const {rest, number, sum} = msg
+        let axConf = {
+            method: "get",
+            baseURL: `http://localhost:7575/api/v1/saveData/${number}/${rest}/${sum}`,
+
+        }
+        return await axios(axConf)
+            .then((response) => {
+                return response.data.success
+            })
+
     }
 }
 module.exports = exp

@@ -244,6 +244,11 @@ app.get('/del', function(req,res){
     });
     res.sendStatus("200");
 });
+app.use(require('body-parser').json());
+app.post('/fullCheck', function (req, res) {
+    console.log(req.body)
+    res.send('POST request to homepage')
+})
 
 
 io.on('connection', function(socket){
