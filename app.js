@@ -99,7 +99,7 @@ app.use(express.static(__dirname+'/public'));
 
 
 app.use(express.static(__dirname+'/public'));
-app.use('/fonts', express.static(__dirname+'/node_modules/uikit/src/fonts/'));
+app.use('/fonts', express.static(__dirname+'/public/data/uikit2/fonts/'));
 
 app.get('/socket.io.js', function(req,res){
     res.sendFile(__dirname+'/node_modules/socket.io-client/dist/socket.io.js');
@@ -114,17 +114,17 @@ app.get('/jquery.js', function(req,res){
 });
 
 app.get('/uikit.js', function(req,res){
-    res.sendFile(__dirname+'/node_modules/uikit/dist/js/uikit.min.js');
+    res.sendFile(__dirname+'/public/data/uikit2/js/uikit.min.js');
 });
 app.get('/slideshow-fx.js', function(req,res){
-    res.sendFile(__dirname+'/node_modules/uikit/dist/js/components/slideshow-fx.js');
+    res.sendFile(__dirname+'/public/data/uikit2/js/components/slideshow-fx.js');
 });
 app.get('/slideshow.js', function(req,res){
-    res.sendFile(__dirname+'/node_modules/uikit/dist/js/components/slideshow.js');
+    res.sendFile(__dirname+'/public/data/uikit2/js/components/slideshow.js');
 });
 
 app.get('/uikit.css', function(req,res){
-    res.sendFile(__dirname+'/node_modules/uikit/dist/css/uikit.almost-flat.min.css');
+    res.sendFile(__dirname+'/public/data/uikit2/css/uikit.almost-flat.min.css');
 });
 
 app.get('/animate.css', function(req,res){
