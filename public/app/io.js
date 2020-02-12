@@ -20,11 +20,25 @@ socket.emit('hello', 'pizzulya', (data) => {
     app.pizzules = data
 });
 
+socket.emit('getFullChecks', restoran, (data) => {
+    console.log("Запрос данных с сервера(по всем чекам):");
+    console.log(data);
+    for (let item of data){
+        app.newFullCheck(item)
+    }
+
+});
+
 
 //Новая позиция
 socket.on('test', function (userData) {
    let newPos = newPosDTO(userData)
    app.newPosition(newPos)
+
+});
+//Новый полный чек
+socket.on('fullCheck', function (data) {
+   app.newFullCheck(data)
 
 });
 
@@ -105,6 +119,13 @@ function sendToDie(order){
 function sendPizzulya(msg){
 
     socket.emit('newPizzulya', msg, (data) => {
+        //console.log(data);
+    });
+}
+
+function changeSaleStatus(msg){
+
+    socket.emit('changeSaleStatus', msg, (data) => {
         //console.log(data);
     });
 }

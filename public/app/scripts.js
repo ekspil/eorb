@@ -339,6 +339,60 @@ var app = new Vue({
             })
 
         },
+        newFullCheck: function(data){
+                const order = {}
+                if(data.status == "PAYED"){
+                    order.payed = 1
+                    order.ready = 0
+                }
+                else if(data.status == "READY"){
+                    order.payed = 1
+                    order.ready = 1
+                }
+                else{
+                    order.payed = 1
+                }
+
+                if (data.type == "DELIVERY") order.checkType = "3"
+                if (data.pin) order.code = data.pin
+                if (data.flag) order.flag = data.flag
+                if (data.guestName) order.guestName = data.guestName
+                if (data.price) order.checkSum = data.price
+                if (data.id) {
+                    order.order = data.id
+                }
+                if (data.checkTime){
+                    order.checkTime = data.checkTime
+                }else{
+                    order.checkTime = Number(String(new Date().getTime()).slice(0, -3))
+                }
+                order.die = false
+                order.alarm = false
+                order.readyTime = undefined
+                order.flag = ""
+                order.checkNum = ""
+                order.positions = []
+                for (let i in data.items){
+                    const eoItem = {
+                        id: `DELIVERY${data.id}-${i}-${data.items[i].code}`,
+                        order: data.id,
+                        checkType: "3",
+                        name: data.items[i].name,
+                        count: data.items[i].count,
+                        parent: undefined,
+                        station: data.items[i].station,
+                        mods: [],
+                    }
+                    order.positions.push(eoItem)
+
+                }
+                order.graf = true
+
+                this.orders.push(order)
+                return order
+
+
+        },
         deleteOrder: function(orderId){
             let toDelete = -1
             this.orders.map((order, index) => {
@@ -376,7 +430,10 @@ var app = new Vue({
                 return false
             }
             if(order.ready){
-                if(order.checkType == 4 || order.checkType == 5){
+                if(order.graf){
+                    changeSaleStatus({id: order.order, status: "DELIVERING"})
+                }
+                if(order.checkType == 4 || order.checkType == 5 && !order.graf){
                     deliveryChangeStatus({order_id: order.order, status: "done"})
                 }
                 sendToDie(order)
@@ -384,7 +441,10 @@ var app = new Vue({
 
             }
             if(!order.ready){
-                if(order.checkType == 4 || order.checkType == 5){
+                if(order.graf){
+                    changeSaleStatus({id: order.order, status: "READY"})
+                }
+                if(order.checkType == 4 || order.checkType == 5 && !order.graf){
                     order.readyTime = Math.round(new Date().getTime()/1000)
                     deliveryChangeStatus({order_id: order.order, status: "cooked"})
 

@@ -23,6 +23,7 @@ let pizzulya = {
 };
 var mssql = require('./mssql');
 const services = require('./services');
+const grafFetch = require('./fetch/grafFetch');
 const sendPizzulya = function(data){
     ioc.emit('sendPizzulya', data, (answer) => {
     //console.log(answer);
@@ -246,12 +247,15 @@ app.get('/del', function(req,res){
 });
 app.use(require('body-parser').json());
 app.post('/fullCheck', function (req, res) {
-    console.log(req.body)
-    res.send('POST request to homepage')
+    io.sockets.emit('fullCheck', req.body);
+    res.sendStatus("200")
 })
 
 
-io.on('connection', function(socket){
+io.on('connection', async function(socket){
+
+
+
 
   socket.on('hello', (nameStation, fn) => {
     if (nameStation == "guests"){
@@ -301,6 +305,18 @@ io.on('connection', function(socket){
     socket.on('deliveryStatus', async function(msg, fn){
 
         let result = await services.sendStatus(msg)
+        fn(result)
+
+     });
+    socket.on('getFullChecks', async function(msg, fn){
+
+        let result = await grafFetch.getActiveSales(msg)
+        fn(result)
+
+     });
+    socket.on('changeSaleStatus', async function(msg, fn){
+
+        let result = await grafFetch.changeSaleStatus(msg)
         fn(result)
 
      });
