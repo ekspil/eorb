@@ -42,6 +42,7 @@
 
                     </div>
                 <div  class="uk-position-bottom-center uk-text-center" v-if="order.code && order.ready">Пинкод: {{order.code}}</div>
+                <div  class="uk-position-bottom-center uk-text-center" v-if="order.extId">Заказ: {{order.extId}}</div>
             </div>
 
 
@@ -78,6 +79,7 @@
 
 <script src="app/skdn.js"></script>
 <script src="app/query.js"></script>
+<script src="/socket.io.js"></script>
 <script src="/socket.io.js"></script>
 <script src="/jquery.js"></script>
 <script src="app/distr/js/uikit.js"></script>

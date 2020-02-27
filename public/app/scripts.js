@@ -358,11 +358,12 @@ var app = new Vue({
                 if (data.flag) order.flag = data.flag
                 if (data.guestName) order.guestName = data.guestName
                 if (data.price) order.checkSum = data.price
+                if (data.extId) order.extId = data.extId
                 if (data.id) {
                     order.order = data.id
                 }
-                if (data.checkTime){
-                    order.checkTime = data.checkTime
+                if (data.createdAt){
+                    order.checkTime = Number(String(data.createdAt).slice(0, -3))
                 }else{
                     order.checkTime = Number(String(new Date().getTime()).slice(0, -3))
                 }
@@ -370,7 +371,7 @@ var app = new Vue({
                 order.alarm = false
                 order.readyTime = undefined
                 order.flag = ""
-                order.checkNum = ""
+                if (data.extId) order.checkNum = data.extId
                 order.positions = []
                 for (let i in data.items){
                     const eoItem = {
@@ -383,7 +384,7 @@ var app = new Vue({
                         station: data.items[i].station,
                         mods: [],
                     }
-                    order.positions.push(eoItem)
+                    order.positions.push(newPosDTO(eoItem))
 
                 }
                 order.graf = true
@@ -431,7 +432,8 @@ var app = new Vue({
             }
             if(order.ready){
                 if(order.graf){
-                    changeSaleStatus({id: order.order, status: "DELIVERING"})
+                    changeSaleStatus({id: order.order, status: "DELIVERING"}, order)
+                    return true
                 }
                 if(order.checkType == 4 || order.checkType == 5 && !order.graf){
                     deliveryChangeStatus({order_id: order.order, status: "done"})
@@ -442,7 +444,9 @@ var app = new Vue({
             }
             if(!order.ready){
                 if(order.graf){
-                    changeSaleStatus({id: order.order, status: "READY"})
+                    order.readyTime = Math.round(new Date().getTime()/1000)
+                    changeSaleStatus({id: order.order, status: "READY"}, order)
+                    return true
                 }
                 if(order.checkType == 4 || order.checkType == 5 && !order.graf){
                     order.readyTime = Math.round(new Date().getTime()/1000)

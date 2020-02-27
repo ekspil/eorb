@@ -64,7 +64,6 @@ async function changeSaleStatus(input) {
   }
 }`
     const body = JSON.stringify({query, variables})
-    console.log(body)
     try{
         const response = await fetch(`http://192.168.15.26:4001`, {
             method: "POST",

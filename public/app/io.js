@@ -123,10 +123,19 @@ function sendPizzulya(msg){
     });
 }
 
-function changeSaleStatus(msg){
+function changeSaleStatus(msg, order){
 
     socket.emit('changeSaleStatus', msg, (data) => {
-        //console.log(data);
+        console.log(data)
+        if(data.status === "DELIVERING"){
+            sendToDie(order)
+            app.deleteOrder(order.order)
+        }
+        else if(data.status === "READY"){
+            sendToReady(order)
+            app.readyOrder(order.order, order.readyTime)
+        }
+
     });
 }
 
