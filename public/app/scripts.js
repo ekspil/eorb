@@ -5,6 +5,8 @@ var app = new Vue({
     data:{
         station: station,
         manager: manager,
+        extras: extras,
+        deleteSelect: 0,
         flag: flag,
         pizzules: {
             pepper: {
@@ -25,6 +27,7 @@ var app = new Vue({
                 start: "uk-height-90 uk-inline all-start",
                 die: "uk-height-90 uk-inline all-die",
                 alarm: "uk-height-90 uk-inline all-alarm",
+                deleteSelect: "uk-height-90 uk-inline all-delete",
             },
             delivery: {
                 start: "uk-height-90 uk-inline all-start",
@@ -91,8 +94,14 @@ var app = new Vue({
     },
     computed: {
         mainClass: function(){
-            if (this.station == 4){
+            if (this.station == 4 && this.extras !=1){
                 return "uk-child-width-1-5 uk-height-1-1 uk-grid-collapse uk-width-5-6"
+            }
+            else if (this.station != 4 && this.extras ==1 && this.manager==1){
+                return "uk-child-width-1-5 uk-height-1-1 uk-grid-collapse uk-width-5-6"
+            }
+            else if (this.station == 4 && this.extras ==1 && this.manager==1){
+                return "uk-child-width-1-5 uk-height-1-1 uk-grid-collapse uk-width-4-6"
             }
             else {
                 return "uk-child-width-1-5 uk-height-1-1 uk-grid-collapse uk-width-1-1"
@@ -162,6 +171,9 @@ var app = new Vue({
             return timemin+":"+timesec
         },
         thisorderclass: function(order){
+            if(this.deleteSelect === 1){
+                return this.classes.all.deleteSelect
+            }
             if(!order.ready && !order.payed){
                 return this.classes.all.start
             }

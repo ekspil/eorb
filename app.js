@@ -251,6 +251,12 @@ app.post('/fullCheck', function (req, res) {
     res.sendStatus("200")
 })
 
+app.post('/deleteFullCheck', function (req, res) {
+    delete jsonCheck[req.body.id];
+    io.sockets.emit('checkDel', req.body);
+    res.sendStatus("200")
+})
+
 
 io.on('connection', async function(socket){
 

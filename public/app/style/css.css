@@ -67,6 +67,10 @@ body {
     background-color: #fef8d4;
     color: black;
 }
+.all-delete {
+    background-color: #fef8d4;
+    color: black;
+}
 .all-die {
     background-color: black;
     color: white;
@@ -101,4 +105,7 @@ body {
 }
 .uk-position-bottom-center{
     bottom: 1%;
+}
+.uk-height-1-5 {
+    height: 20%;
 }
