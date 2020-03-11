@@ -367,6 +367,7 @@ var app = new Vue({
 
                 if (data.type == "DELIVERY") order.checkType = "3"
                 if (data.pin) order.code = data.pin
+                if (data.text) order.text = data.text
                 if (data.flag) order.flag = data.flag
                 if (data.guestName) order.guestName = data.guestName
                 if (data.price) order.checkSum = data.price
