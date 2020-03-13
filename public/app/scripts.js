@@ -92,6 +92,13 @@ var app = new Vue({
             ]
 
     },
+    beforeMount(){
+        this.sound = new Audio();
+        this.sound.src = "Sound.mp3";
+        this.sound.preload = "auto";
+        this.sound.autoplay = true;
+
+    },
     computed: {
         mainClass: function(){
             if (this.station == 4 && this.extras !=1){
@@ -141,6 +148,11 @@ var app = new Vue({
         }
     },
     methods: {
+        playSound: async function(){
+            await this.sound.pause();
+            this.sound.currentTime = 0;
+            await this.sound.play();
+        },
         onlyName: function(name){
             name = name.split("@")
             return name[0]
@@ -351,7 +363,8 @@ var app = new Vue({
             })
 
         },
-        newFullCheck: function(data){
+        newFullCheck: async function(data){
+
                 const order = {}
                 if(data.status == "PAYED"){
                     order.payed = 1
@@ -403,6 +416,9 @@ var app = new Vue({
                 order.graf = true
 
                 this.orders.push(order)
+                if (manager == 1){
+                    await this.playSound()
+                }
                 return order
 
 
