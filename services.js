@@ -14,6 +14,22 @@ const exp = {
             }
 
         }
+        let axConfS = {
+            method: "get",
+            baseURL: `https://delivery.rb24.ru/common_api/order/${order_id}`,
+            params: {
+                "apikey": "ZmFkMTlhNzQyMGRhMGI4N2NlOTQwZTI0MmQ3OTk1MTU3NjIwMmRkMA"
+
+            }
+
+        }
+
+        const thisStatus = await axios(axConfS)
+        if(thisStatus.data.status === 'done'){
+            return false
+        }
+
+
         return await axios(axConf)
             .then((response) => {
                 return response.data.success
