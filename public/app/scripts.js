@@ -5,6 +5,8 @@ var app = new Vue({
     data:{
         station: station,
         manager: manager,
+        extras: extras,
+        deleteSelect: 0,
         flag: flag,
         pizzules: {
             pepper: {
@@ -25,6 +27,7 @@ var app = new Vue({
                 start: "uk-height-90 uk-inline all-start",
                 die: "uk-height-90 uk-inline all-die",
                 alarm: "uk-height-90 uk-inline all-alarm",
+                deleteSelect: "uk-height-90 uk-inline all-delete",
             },
             delivery: {
                 start: "uk-height-90 uk-inline all-start",
@@ -89,10 +92,23 @@ var app = new Vue({
             ]
 
     },
+    beforeMount(){
+        this.sound = new Audio();
+        this.sound.src = "Sound.mp3";
+        this.sound.preload = "auto";
+        this.sound.autoplay = true;
+
+    },
     computed: {
         mainClass: function(){
-            if (this.station == 4){
+            if (this.station == 4 && this.extras !=1){
                 return "uk-child-width-1-5 uk-height-1-1 uk-grid-collapse uk-width-5-6"
+            }
+            else if (this.station != 4 && this.extras ==1 && this.manager==1){
+                return "uk-child-width-1-5 uk-height-1-1 uk-grid-collapse uk-width-5-6"
+            }
+            else if (this.station == 4 && this.extras ==1 && this.manager==1){
+                return "uk-child-width-1-5 uk-height-1-1 uk-grid-collapse uk-width-4-6"
             }
             else {
                 return "uk-child-width-1-5 uk-height-1-1 uk-grid-collapse uk-width-1-1"
@@ -132,6 +148,11 @@ var app = new Vue({
         }
     },
     methods: {
+        playSound: async function(){
+            await this.sound.pause();
+            this.sound.currentTime = 0;
+            await this.sound.play();
+        },
         onlyName: function(name){
             name = name.split("@")
             return name[0]
@@ -162,6 +183,9 @@ var app = new Vue({
             return timemin+":"+timesec
         },
         thisorderclass: function(order){
+            if(this.deleteSelect === 1){
+                return this.classes.all.deleteSelect
+            }
             if(!order.ready && !order.payed){
                 return this.classes.all.start
             }
@@ -339,6 +363,66 @@ var app = new Vue({
             })
 
         },
+        newFullCheck: async function(data){
+
+                const order = {}
+                if(data.status == "PAYED"){
+                    order.payed = 1
+                    order.ready = 0
+                }
+                else if(data.status == "READY"){
+                    order.payed = 1
+                    order.ready = 1
+                }
+                else{
+                    order.payed = 1
+                }
+
+                if (data.type == "DELIVERY") order.checkType = "3"
+                if (data.pin) order.code = data.pin
+                if (data.text) order.text = data.text
+                if (data.flag) order.flag = data.flag
+                if (data.guestName) order.guestName = data.guestName
+                if (data.price) order.checkSum = data.price
+                if (data.extId) order.extId = data.extId
+                if (data.id) {
+                    order.order = data.id
+                }
+                if (data.createdAt){
+                    order.checkTime = Number(String(data.createdAt).slice(0, -3))
+                }else{
+                    order.checkTime = Number(String(new Date().getTime()).slice(0, -3))
+                }
+                order.die = false
+                order.alarm = false
+                order.readyTime = undefined
+                order.flag = ""
+                if (data.extId) order.checkNum = data.extId
+                order.positions = []
+                for (let i in data.items){
+                    const eoItem = {
+                        id: `DELIVERY${data.id}-${i}-${data.items[i].code}`,
+                        order: data.id,
+                        checkType: "3",
+                        name: data.items[i].name,
+                        count: data.items[i].count,
+                        parent: undefined,
+                        station: data.items[i].station,
+                        mods: [],
+                    }
+                    order.positions.push(newPosDTO(eoItem))
+
+                }
+                order.graf = true
+
+                this.orders.push(order)
+                if (manager == 1){
+                    await this.playSound()
+                }
+                return order
+
+
+        },
         deleteOrder: function(orderId){
             let toDelete = -1
             this.orders.map((order, index) => {
@@ -376,7 +460,11 @@ var app = new Vue({
                 return false
             }
             if(order.ready){
-                if(order.checkType == 4 || order.checkType == 5){
+                if(order.graf){
+                    changeSaleStatus({id: order.order, status: "DELIVERING"}, order)
+                    return true
+                }
+                if(order.checkType == 4 || order.checkType == 5 && !order.graf){
                     deliveryChangeStatus({order_id: order.order, status: "done"})
                 }
                 sendToDie(order)
@@ -384,7 +472,12 @@ var app = new Vue({
 
             }
             if(!order.ready){
-                if(order.checkType == 4 || order.checkType == 5){
+                if(order.graf){
+                    order.readyTime = Math.round(new Date().getTime()/1000)
+                    changeSaleStatus({id: order.order, status: "READY"}, order)
+                    return true
+                }
+                if(order.checkType == 4 || order.checkType == 5 && !order.graf){
                     order.readyTime = Math.round(new Date().getTime()/1000)
                     deliveryChangeStatus({order_id: order.order, status: "cooked"})
 

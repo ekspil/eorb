@@ -42,6 +42,7 @@
 
                     </div>
                 <div  class="uk-position-bottom-center uk-text-center" v-if="order.code && order.ready">Пинкод: {{order.code}}</div>
+                <div  class="uk-position-bottom-center uk-text-center" v-if="order.extId">Заказ: {{order.extId}} \\ {{order.text}}</div>
             </div>
 
 
@@ -74,10 +75,21 @@
 
     </div>
 
+    <div class="uk-child-width-1-1 uk-height-1-1 uk-grid-collapse uk-width-1-6" v-if="extras == 1">
+        <div class="block js-wrapper uk-height-1-5 uk-text-center uk-inline">
+            <p> Удаление заказа </p>
+
+            <p class="uk-position-bottom-center"><button class="uk-button uk-button-danger uk-button-large" @click="deleteOrder = 1">Выбрать!</button></p>
+        </div>
+
+
+    </div>
+
 </div>
 
 <script src="app/skdn.js"></script>
 <script src="app/query.js"></script>
+<script src="/socket.io.js"></script>
 <script src="/socket.io.js"></script>
 <script src="/jquery.js"></script>
 <script src="app/distr/js/uikit.js"></script>

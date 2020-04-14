@@ -22,6 +22,7 @@ function getUrlVars() {
 
 
 var station = getUrlVars()["station"];  //Определяем значение станции 0 - все, 1 - бургеры, 2 - фри, 3 - прочее
+var extras = getUrlVars()["extras"];  //1 есть панель дополнительных кнопок.
 var manager = getUrlVars()["manager"];  //Для менеджера необходимо показать развернутую информацию если равно 1
 let flag =  getUrlVars()["flag"] || "";
 var positions = {};

@@ -14,6 +14,36 @@ const exp = {
             }
 
         }
+        let axConfS = {
+            method: "get",
+            baseURL: `https://delivery.rb24.ru/common_api/order/${order_id}`,
+            params: {
+                "apikey": "ZmFkMTlhNzQyMGRhMGI4N2NlOTQwZTI0MmQ3OTk1MTU3NjIwMmRkMA"
+
+            }
+
+        }
+
+        const thisStatus = await axios(axConfS)
+        if(thisStatus.data.status === 'done'){
+            return false
+        }
+
+
+        return await axios(axConf)
+            .then((response) => {
+                return response.data.success
+            })
+
+    },
+    sendInfoToLog: async function(msg) {
+        //accepted, production, cooked, sent, done, canceled(отменен)
+        const {rest, number, sum} = msg
+        let axConf = {
+            method: "get",
+            baseURL: `http://localhost:7575/api/v1/saveData/${number}/${rest}/${sum}`,
+
+        }
         return await axios(axConf)
             .then((response) => {
                 return response.data.success

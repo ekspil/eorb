@@ -5,7 +5,7 @@ const newPosDTO = function(data) {
         order: data.unit,
         checkType: data.checkType,
         name: data.name,
-        count: 1,
+        count: data.count || 1,
         parent: data.parent,
         station: data.station,
         mods: []
@@ -35,6 +35,7 @@ const newOrderDTO = function(data) {
         checkSum: data.checkSum || "",
         code: data.code || "",
         guestName: data.guestName || "",
+        extId: data.extId || "",
         positions: []
     }
     return newO

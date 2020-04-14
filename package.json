@@ -1,22 +1,17 @@
 {
-  "name": "EO_RB",
-  "version": "1.1.1",
-  "description": "Electronnaya ochered' RB",
-  "main": "app.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "EfremovAV",
-  "license": "ISC",
+  "name": "EO_etalon",
+  "version": "0.0.1",
   "dependencies": {
-    "animate.css": "^3.5.2",
-    "async": "^2.6.1",
-    "express": "^4.15.3",
-    "jquery": "^3.2.1",
-    "log4js": "^1.1.1",
-    "mssql": "^4.3.0",
-    "node-autodetect-utf8-cp1251-cp866": "^0.1.0",
-    "socket.io": "^2.0.3",
-    "uikit": "^2.27.4"
+    "animate.css": "^3.7.2",
+    "axios": "^0.19.2",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "jquery": "^3.4.1",
+    "log4js": "^6.1.1",
+    "mssql": "^6.0.1",
+    "node-fetch": "^2.6.0",
+    "socket.io": "^2.3.0",
+    "socket.io-client": "^2.3.0",
+    "socket.io-promise": "^1.1.2"
   }
 }

@@ -23,6 +23,7 @@ let pizzulya = {
 };
 var mssql = require('./mssql');
 const services = require('./services');
+const grafFetch = require('./fetch/grafFetch');
 const sendPizzulya = function(data){
     ioc.emit('sendPizzulya', data, (answer) => {
     //console.log(answer);
@@ -99,7 +100,7 @@ app.use(express.static(__dirname+'/public'));
 
 
 app.use(express.static(__dirname+'/public'));
-app.use('/fonts', express.static(__dirname+'/node_modules/uikit/src/fonts/'));
+app.use('/fonts', express.static(__dirname+'/public/data/uikit2/fonts/'));
 
 app.get('/socket.io.js', function(req,res){
     res.sendFile(__dirname+'/node_modules/socket.io-client/dist/socket.io.js');
@@ -114,17 +115,17 @@ app.get('/jquery.js', function(req,res){
 });
 
 app.get('/uikit.js', function(req,res){
-    res.sendFile(__dirname+'/node_modules/uikit/dist/js/uikit.min.js');
+    res.sendFile(__dirname+'/public/data/uikit2/js/uikit.min.js');
 });
 app.get('/slideshow-fx.js', function(req,res){
-    res.sendFile(__dirname+'/node_modules/uikit/dist/js/components/slideshow-fx.js');
+    res.sendFile(__dirname+'/public/data/uikit2/js/components/slideshow-fx.js');
 });
 app.get('/slideshow.js', function(req,res){
-    res.sendFile(__dirname+'/node_modules/uikit/dist/js/components/slideshow.js');
+    res.sendFile(__dirname+'/public/data/uikit2/js/components/slideshow.js');
 });
 
 app.get('/uikit.css', function(req,res){
-    res.sendFile(__dirname+'/node_modules/uikit/dist/css/uikit.almost-flat.min.css');
+    res.sendFile(__dirname+'/public/data/uikit2/css/uikit.almost-flat.min.css');
 });
 
 app.get('/animate.css', function(req,res){
@@ -244,9 +245,23 @@ app.get('/del', function(req,res){
     });
     res.sendStatus("200");
 });
+app.use(require('body-parser').json());
+app.post('/fullCheck', function (req, res) {
+    io.sockets.emit('fullCheck', req.body);
+    res.sendStatus("200")
+})
+
+app.post('/deleteFullCheck', function (req, res) {
+    delete jsonCheck[req.body.id];
+    io.sockets.emit('checkDel', req.body);
+    res.sendStatus("200")
+})
 
 
-io.on('connection', function(socket){
+io.on('connection', async function(socket){
+
+
+
 
   socket.on('hello', (nameStation, fn) => {
     if (nameStation == "guests"){
@@ -296,6 +311,18 @@ io.on('connection', function(socket){
     socket.on('deliveryStatus', async function(msg, fn){
 
         let result = await services.sendStatus(msg)
+        fn(result)
+
+     });
+    socket.on('getFullChecks', async function(msg, fn){
+
+        let result = await grafFetch.getActiveSales(msg)
+        fn(result)
+
+     });
+    socket.on('changeSaleStatus', async function(msg, fn){
+
+        let result = await grafFetch.changeSaleStatus(msg)
         fn(result)
 
      });
