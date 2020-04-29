@@ -4,11 +4,14 @@ const skdn = function(positions){
     //СКДН по названиям (a, СТРОКА ПОИСКА, ПОЗИЦИЯ ПО АЛФАВИТУ)
     function listCheck(a){
 
+        a = check(a, "Соус ", "г")
+        a = check(a, "Кетчуп", "г")
         a = check(a, "картоф", "е")
         a = check(a, "наггетс", "е")
         a = check(a, "пельмен", "е")
         a = check(a, "баскет", "е")
         a = check(a, "крыл", "е")
+        a = check(a, "чикен фри", "е")
         a = check(a, "кольца", "е")
         a = check(a, "ролл", "д")
         a = check(a, "бургер", "д")
@@ -26,7 +29,6 @@ const skdn = function(positions){
         a = check(a, "lipton", "б")
         a = check(a, "Minerale", "б")
         a = check(a, "Балтика", "б")
-        a = check(a, "Соус", "г")
         return a
     }
     //СКДН по РОДИТЕЛЮ (a, СТРОКА ПОИСКА, ПОЗИЦИЯ ПО АЛФАВИТУ) - в приоритете
