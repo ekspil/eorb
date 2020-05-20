@@ -83,7 +83,8 @@ async function changeSaleStatus(input) {
                 throw new Error("No connection")
         }
     }
-    catch{
+    catch(err){
+        console.log(err)
         throw new Error("No connection")
     }
 
