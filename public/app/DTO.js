@@ -36,7 +36,9 @@ const newOrderDTO = function(data) {
         code: data.code || "",
         guestName: data.guestName || "",
         extId: data.extId || "",
-        positions: []
+        positions: [],
+        takeOut: data.takeOut,
+        text: data.text || ""
     }
     return newO
 }

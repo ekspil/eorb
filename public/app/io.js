@@ -77,6 +77,15 @@ socket.on('sendPizzulya', function (msg) {
 
 });
 
+//Обновление пицуль
+socket.on('takeOut', function (msg) {
+    const {order, comment} = msg
+    const o = app.orders.find((ord)=> ord.order == order)
+    o.takeOut = 1
+    o.text = comment
+
+});
+
 
 //Отправка данных
 function sendToReady(order){

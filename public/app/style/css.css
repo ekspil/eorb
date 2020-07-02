@@ -87,6 +87,30 @@ body {
     background-color: #a5e8d7;
     color: black;
 }
+
+@keyframes anime {
+    0% {
+        background-color: #c5de5f;
+    }
+    25% {
+        background-color: #dea15f;
+    }
+    50% {
+        background-color: #c5de5f;
+    }
+    75% {
+        background-color: #dea15f;
+    }
+    100% {
+        background-color: #c5de5f;
+    }
+}
+
+
+.app-take-out {
+    animation: anime infinite 3s linear;
+    color: black;
+}
 .delivery-process {
     background-color: #fece01;
     color: black;
@@ -97,6 +121,10 @@ body {
 }
 .app-process {
     background-color: #b378cd;
+    color: white;
+}
+.app-ready {
+    background-color: #8ba3ad;
     color: white;
 }
 .app-ready {
