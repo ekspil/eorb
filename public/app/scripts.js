@@ -43,6 +43,7 @@ var app = new Vue({
                 start: "uk-height-90 uk-inline all-start",
                 payed: "uk-height-90 uk-inline app-process",
                 ready: "uk-height-90 uk-inline app-ready",
+                takeOut: "uk-height-90 uk-inline app-take-out",
             },
 
 
@@ -185,6 +186,9 @@ var app = new Vue({
         thisorderclass: function(order){
             if(this.deleteSelect === 1){
                 return this.classes.all.deleteSelect
+            }
+            if(order.takeOut === 1){
+                return this.classes.app.takeOut
             }
             if(!order.ready && !order.payed){
                 return this.classes.all.start

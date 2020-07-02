@@ -251,6 +251,17 @@ app.post('/fullCheck', function (req, res) {
     res.sendStatus("200")
 })
 
+app.get('/take_out', function (req, res) {
+    io.sockets.emit('takeOut', {order: req.query.order, comment: req.query.comment});
+    jsonCheck[req.query.order].takeOut = 1
+    for (let key in jsonPosition) {
+        if(jsonPosition[key].unit != req.query.order) continue
+        jsonPosition[key].takeOut = 1
+        jsonPosition[key].text = req.query.comment
+    }
+    res.sendStatus("200")
+})
+
 app.post('/deleteFullCheck', function (req, res) {
     delete jsonCheck[req.body.id];
     io.sockets.emit('checkDel', req.body);
