@@ -41,10 +41,12 @@
                 </div>
 
                     </div>
-                <div  class="uk-position-bottom-center uk-text-center" v-if="order.code && order.ready">Пинкод: {{order.code}}</div>
+                <div  class="uk-position-bottom-center uk-text-center">
+                    <div v-if="order.code && order.ready">Пинкод: {{order.code}}</div>
+                    <div v-if="order.extId">Заказ: {{order.extId}} \\ {{order.text}}</div>
+                    <div v-else-if="order.text">{{order.text}}</div>
+                </div>
 
-                <div  class="uk-position-bottom-center uk-text-center" v-if="order.extId">Заказ: {{order.extId}} \\ {{order.text}}</div>
-                <div  class="uk-position-bottom-center uk-text-center" v-else-if="order.text">{{order.text}}</div>
             </div>
 
 
