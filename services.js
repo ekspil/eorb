@@ -25,7 +25,7 @@ const exp = {
         }
 
         const thisStatus = await axios(axConfS)
-        if(thisStatus.data.status === 'done'){
+        if(thisStatus.data.status === 'done' || thisStatus.data.status === 'canceled' ){
             return false
         }
 
