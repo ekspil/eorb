@@ -383,6 +383,8 @@ var app = new Vue({
                 }
 
                 if (data.type == "DELIVERY") order.checkType = "3"
+                if (data.type == "IN") order.checkType = "1"
+                if (data.type == "OUT") order.checkType = "2"
                 if (data.pin) order.code = data.pin
                 if (data.text) order.text = data.text
                 if (data.flag) order.flag = data.flag
